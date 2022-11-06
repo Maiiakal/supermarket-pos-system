@@ -34,14 +34,6 @@ const FilterableProductTable = () => {
     <div>
       <h1>Product Table</h1>
 
-      {products.map((product) => (
-        <div key={product.code}>
-          <h2>{product.name}</h2>
-        </div>
-      ))}
-
-      <h1>Product Table</h1>
-
       <Table striped bordered hover className="table-container">
         <thead>
           <tr>
@@ -52,13 +44,15 @@ const FilterableProductTable = () => {
             <th>Action</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>
+          {products.map((product) => (
+            <tr key={product.code}>
+              <td>{product.code}</td>
+              <td>{product.name}</td>
+              <td>{product.category}</td>
+              <td>{"$"+product.price}</td>
+              <td>
               <Button className="button" variant="primary">
                 View
               </Button>
@@ -69,42 +63,10 @@ const FilterableProductTable = () => {
                 Delete
               </Button>
             </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>
-              <Button className="button" variant="primary">
-                View
-              </Button>
-              <Button className="button" variant="success">
-                Edit
-              </Button>
-              <Button className="button" variant="danger">
-                Delete
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Thornton</td>
-            <td>Thornton</td>
-            <td>@twitter</td>
-            <td>
-              <Button className="button" variant="primary">
-                View
-              </Button>
-              <Button className="button" variant="success">
-                Edit
-              </Button>
-              <Button className="button" variant="danger">
-                Delete
-              </Button>
-            </td>
-          </tr>
+            </tr>
+          ))}
         </tbody>
+        
       </Table>
     </div>
   )
