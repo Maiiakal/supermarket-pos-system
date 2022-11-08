@@ -1,7 +1,7 @@
 import '../styles/Table.css'
 import { Button } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
-import { Pagination } from 'react-bootstrap'
+import ReactPagination from './common/Pagination'
 import { useState, useEffect, useMemo } from 'react'
 import Search from './common/Search'
 
@@ -29,41 +29,14 @@ const FilterableProductTable = () => {
     return items
   }
 
-  function calculatePages(data) {
-    const pages = []
-    const num = Math.ceil(data.length / ITEMS_PER_PAGE)
-    for (let i = 2; i <= num; i++) {
-      pages.push(<Pagination.Item key={i}>{i}</Pagination.Item>)
-    }
-    return pages
-  }
-
-  function ReactPagination({ pages }) {
-    return (
-      <Pagination className="pagination">
-        <Pagination.First />
-        <Pagination.Prev />
-
-        <Pagination.Item active>{1}</Pagination.Item>
-
-        {pages}
-
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
-    )
-  }
-
   const products = productsGenerator(110)
-  const pages = calculatePages(products, ITEMS_PER_PAGE)
+
 
   const filtered = useMemo(() => {
     let filteredResult = products
 
     if (search) {
-      filteredResult = filteredResult.filter(r => 
-        r.code == parseInt(search)
-      )
+      filteredResult = filteredResult.filter((r) => r.code == parseInt(search))
     }
 
     setTotalItems(filteredResult.length)
@@ -131,7 +104,8 @@ const FilterableProductTable = () => {
         </div>
       )}
 
-      <ReactPagination pages={pages} />
+      <ReactPagination total={totalItems} itemsPerPage = {ITEMS_PER_PAGE} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>
+
     </div>
   )
 }
@@ -139,6 +113,7 @@ const FilterableProductTable = () => {
 export default FilterableProductTable
 
 /*
+
   function handleChange(e) {
     setPerson({
       ...person,

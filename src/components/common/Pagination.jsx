@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Pagination from 'react-bootstrap/Pagination'
 
 const ReactPagination = ({
-  total = 0,
-  itemsPerPage = 20,
-  currentPage = 1,
+  total,
+  itemsPerPage,
+  currentPage,
   onPageChange,
 }) => {
   const [totalPages, setTotalPages] = useState(0)
@@ -35,6 +35,10 @@ const ReactPagination = ({
 
   return (
     <Pagination>
+      <Pagination.First
+        onClick={() => onPageChange(1)}
+        disabled={currentPage === 1}
+      />
       <Pagination.Prev
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -44,8 +48,44 @@ const ReactPagination = ({
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       />
+      <Pagination.Last
+        onClick={() => onPageChange(totalPages)}
+        disabled={currentPage === totalPages}
+      />
     </Pagination>
   )
 }
 
 export default ReactPagination
+
+/* 
+
+function calculatePages(data) {
+    const pages = []
+    const num = Math.ceil(data.length / ITEMS_PER_PAGE)
+    for (let i = 2; i <= num; i++) {
+      pages.push(<Pagination.Item key={i}>{i}</Pagination.Item>)
+    }
+    return pages
+  }
+
+  function ReactPagination1({ pages }) {
+    return (
+      <Pagination className="pagination">
+        <Pagination.First />
+        <Pagination.Prev />
+
+        <Pagination.Item active>{1}</Pagination.Item>
+
+        {pages}
+
+        <Pagination.Next />
+        <Pagination.Last />
+      </Pagination>
+    )
+  }
+
+    const pages = calculatePages(products, ITEMS_PER_PAGE)
+
+
+*/
