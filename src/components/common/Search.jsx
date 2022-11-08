@@ -15,6 +15,7 @@ const Search = ({ onSearch }) => {
         placeholder="Search"
         value={search}
         onChange={(e) => onInputChange(e.target.value)}
+        
       />
       <p className ="serachbox-text">Please search by code only!</p>
     </>
