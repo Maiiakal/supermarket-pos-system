@@ -61,7 +61,7 @@ const FilterableProductTable = () => {
     return
   }
 
-  function handleInputChange(e, product) {
+  function handleInputChange(e) {
     setResults({
       ...results,
       [e.target.name]: e.target.value,
@@ -174,7 +174,8 @@ const FilterableProductTable = () => {
         </Modal.Header>
         <Modal.Body>
           <p>Product Name: </p>
-          <input req
+          <input 
+            name="name"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -184,6 +185,7 @@ const FilterableProductTable = () => {
 
           <p>Product Code: </p>
           <input
+            name="code"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -193,6 +195,7 @@ const FilterableProductTable = () => {
 
           <p>Product Price: $</p>
           <input
+            name="price"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -203,6 +206,7 @@ const FilterableProductTable = () => {
           <p>Product Category: </p>
 
           <input
+            name="category"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -231,7 +235,8 @@ const FilterableProductTable = () => {
         </Modal.Header>
         <Modal.Body>
           <p>Product Name: </p>
-          <input req
+          <input 
+            name="name"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -241,6 +246,7 @@ const FilterableProductTable = () => {
 
           <p>Product Code: </p>
           <input
+            name="code"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -250,6 +256,7 @@ const FilterableProductTable = () => {
 
           <p>Product Price: $</p>
           <input
+            name="price"
             type="text"
             className="form-control"
             placeholder="Search"
@@ -260,6 +267,7 @@ const FilterableProductTable = () => {
           <p>Product Category: </p>
 
           <input
+            name="category"
             type="text"
             className="form-control"
             placeholder="Search"
