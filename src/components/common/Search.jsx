@@ -10,8 +10,7 @@ const Search = ({ onSearch }) => {
   return (
     <input
       type="text"
-      className="form-control"
-      style={{ width: "240px" }}
+      className="form-control searchbox"
       placeholder="Search"
       value={search}
       onChange={(e) => onInputChange(e.target.value)}

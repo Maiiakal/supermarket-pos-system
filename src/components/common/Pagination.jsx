@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useMemo } from "react";
-import Pagination from "react-bootstrap/Pagination";
+import React, { useEffect, useState, useMemo } from 'react'
+import Pagination from 'react-bootstrap/Pagination'
 
-const PaginationComponent = ({
+const ReactPagination = ({
   total = 0,
-  itemsPerPage = 10,
+  itemsPerPage = 20,
   currentPage = 1,
-  onPageChange
+  onPageChange,
 }) => {
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     if (total > 0 && itemsPerPage > 0)
-      setTotalPages(Math.ceil(total / itemsPerPage));
-  }, [total, itemsPerPage]);
+      setTotalPages(Math.ceil(total / itemsPerPage))
+  }, [total, itemsPerPage])
 
   const paginationItems = useMemo(() => {
-    const pages = [];
+    const pages = []
 
     for (let i = 1; i <= totalPages; i++) {
       pages.push(
@@ -25,14 +25,13 @@ const PaginationComponent = ({
           onClick={() => onPageChange(i)}
         >
           {i}
-        </Pagination.Item>
-      );
+        </Pagination.Item>,
+      )
     }
+    return pages
+  }, [totalPages, currentPage, onPageChange])
 
-    return pages;
-  }, [totalPages, currentPage, onPageChange]);
-
-  if (totalPages === 0) return null;
+  if (totalPages === 0) return null
 
   return (
     <Pagination>
@@ -46,7 +45,7 @@ const PaginationComponent = ({
         disabled={currentPage === totalPages}
       />
     </Pagination>
-  );
-};
+  )
+}
 
-export default PaginationComponent;
+export default ReactPagination
