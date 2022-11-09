@@ -7,6 +7,8 @@ import Search from './common/Search'
 import productsGenerator from './common/productsGenerator'
 import ReactModal from './common/Modal'
 import { Modal } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
 const ITEMS_PER_PAGE = 30
 
@@ -158,46 +160,52 @@ const FilterableProductTable = () => {
             <Modal.Title>Add Product</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Product Name: </p>
-            <input
-              name="name"
-              type="text"
-              className="form-control"
-              placeholder="Milk"
-              value={currentSelection.name}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Product Name"
+              className="mb-3"
+            >
+              <Form.Control
+                req
+                name="name"
+                type="text"
+                placeholder="Milk"
+                value={currentSelection.name}
+                onChange={handleInputChange}
+              />
+            </FloatingLabel>
 
-            <p>Product Code: </p>
-            <input
-              name="code"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.code}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Unit Price in $"
+              className="mb-3"
+            >
+              <Form.Control
+                req
+                name="price"
+                type="number"
+                placeholder="10"
+                value={currentSelection.price}
+                onChange={handleInputChange}
+              />
+            </FloatingLabel>
 
-            <p>Product Price: $</p>
-            <input
-              name="price"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.price}
-              onChange={handleInputChange}
-            />
-
-            <p>Product Category: </p>
-
-            <input
-              name="category"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.category}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingSelect"
+              label="Please select a category"
+            >
+              <Form.Select
+                id="category"
+                name="category"
+                aria-label="Please select a category"
+                onChange={handleInputChange}
+                value={currentSelection.category}
+              >
+                <option value="Food">Food</option>
+                <option value="Beveragres">Beveragres</option>
+                <option value="Snacks">Snacks</option>
+              </Form.Select>
+            </FloatingLabel>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -263,36 +271,52 @@ const FilterableProductTable = () => {
             <Modal.Title>Product Update</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Product Name: </p>
-            <input
-              name="name"
-              type="text"
-              className="form-control"
-              placeholder="Milk"
-              value={currentSelection.name}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Product Name"
+              className="mb-3"
+            >
+              <Form.Control
+                req
+                name="name"
+                type="text"
+                placeholder="Milk"
+                value={currentSelection.name}
+                onChange={handleInputChange}
+              />
+            </FloatingLabel>
 
-            <p>Product Price: $</p>
-            <input
-              name="price"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.price}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Unit Price in $"
+              className="mb-3"
+            >
+              <Form.Control
+                req
+                name="price"
+                type="number"
+                placeholder="10"
+                value={currentSelection.price}
+                onChange={handleInputChange}
+              />
+            </FloatingLabel>
 
-            <p>Product Category: </p>
-
-            <input
-              name="category"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.category}
-              onChange={handleInputChange}
-            />
+            <FloatingLabel
+              controlId="floatingSelect"
+              label="Please select a category"
+            >
+              <Form.Select
+                id="category"
+                name="category"
+                aria-label="Please select a category"
+                onChange={handleInputChange}
+                value={currentSelection.category}
+              >
+                <option value="Food">Food</option>
+                <option value="Beveragres">Beveragres</option>
+                <option value="Snacks">Snacks</option>
+              </Form.Select>
+            </FloatingLabel>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -301,9 +325,9 @@ const FilterableProductTable = () => {
                 setEdit(false)
                 list.map((p) => {
                   if (p.code === currentSelection.code) {
-                    p.name = currentSelection.name;
-                    p.price = currentSelection.price;
-                    p.category = currentSelection.category;
+                    p.name = currentSelection.name
+                    p.price = currentSelection.price
+                    p.category = currentSelection.category
                   }
                 })
               }}
