@@ -11,6 +11,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 const ITEMS_PER_PAGE = 30
 
 const FilterableProductTable = () => {
+  
   // paginations states
   const [search, setSearch] = useState('')
   const [list, setList] = useState(productsGenerator(130))
