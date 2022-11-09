@@ -134,6 +134,8 @@ const FilterableCategoryTable = () => {
         }}
       />
 
+       <p className ="serachbox-text">Please search by name!</p>
+
       <Button
         variant="outline-primary"
         className="addbtn"

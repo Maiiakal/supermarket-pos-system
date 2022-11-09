@@ -17,7 +17,6 @@ const Search = ({ onSearch }) => {
         onChange={(e) => onInputChange(e.target.value)}
         
       />
-      <p className ="serachbox-text">Please search by code only!</p>
     </>
   )
 }

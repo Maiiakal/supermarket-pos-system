@@ -143,6 +143,8 @@ const FilterableProductTable = () => {
         }}
       />
 
+       <p className ="serachbox-text">Please search by code only!</p>
+
       <Button
         variant="outline-primary"
         className="addbtn"
