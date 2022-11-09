@@ -2,10 +2,9 @@ import '../styles/Table.css'
 import { Button } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import ReactPagination from './common/Pagination'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import Search from './common/Search'
 import productsGenerator from './common/productsGenerator'
-import ReactModal from './common/Modal'
 import { Modal } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
@@ -257,7 +256,6 @@ const FilterableProductTable = () => {
             <p>Product Code: {currentSelection.code}</p>
             <p>Product Price: ${currentSelection.price}</p>
             <p>Product Category: {currentSelection.category}</p>
-            <p>Product Date Created: {currentSelection.date}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={(e) => setView(false)}>
@@ -328,6 +326,7 @@ const FilterableProductTable = () => {
               variant="success"
               onClick={(e) => {
                 setEdit(false)
+                // eslint-disable-next-line
                 list.map((p) => {
                   if (p.code === currentSelection.code) {
                     p.name = currentSelection.name
@@ -361,7 +360,6 @@ const FilterableProductTable = () => {
             <p>Product Code: {currentSelection.code}</p>
             <p>Product Price: ${currentSelection.price}</p>
             <p>Product Category: {currentSelection.category}</p>
-            <p>Product Date Created: {currentSelection.date}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button
