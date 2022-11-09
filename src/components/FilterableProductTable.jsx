@@ -12,28 +12,23 @@ const ITEMS_PER_PAGE = 30
 
 const FilterableProductTable = () => {
   const [search, setSearch] = useState('')
-  const [results, setResults] = useState([]) // search result
+  const [list, setList] = useState(productsGenerator(30))
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
+  const [currentSelection, setCurrentSelection] = useState({
+    code: '',
+    name: '',
+    price: '',
+    category: '',
+  })
   const [view, setView] = useState(false)
   const [add, setAdd] = useState(false)
   const [edit, setEdit] = useState(false)
   const [remove, setRemove] = useState(false)
 
-  const [code, setCode] = useState('')
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-  const [Category, setCategory] = useState('')
-  const [image, setImage] = useState('')
-  const [date, setDate] = useState('')
-
-  const [currentSelection, setCurrentSelection] = useState({})
-
-  const products = productsGenerator(110)
-
   const filtered = useMemo(() => {
-    let filteredResult = products
+    let filteredResult = list
 
     if (search) {
       filteredResult = filteredResult.filter((r) => r.code === parseInt(search))
@@ -45,25 +40,27 @@ const FilterableProductTable = () => {
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
     )
-  }, [results, currentPage, search])
+  }, [list, currentPage, search])
 
   function handleClick(e, product) {
-    setCurrentSelection(product)
-    if (e.target.name === 'view') {
-      setView(true)
-    } else if (e.target.name === 'add') {
+    if (e.target.name === 'add') {
       setAdd(true)
+    } else if (e.target.name === 'view') {
+      setView(true)
+      setCurrentSelection(product)
     } else if (e.target.name === 'edit') {
       setEdit(true)
+      setCurrentSelection(product)
     } else {
       setRemove(true)
+      setCurrentSelection(product)
     }
     return
   }
 
   function handleInputChange(e) {
-    setResults({
-      ...results,
+    setCurrentSelection({
+      ...currentSelection,
       [e.target.name]: e.target.value,
     })
   }
@@ -78,6 +75,15 @@ const FilterableProductTable = () => {
           setCurrentPage(1)
         }}
       />
+
+      <Button
+        variant="outline-primary"
+        className="addbtn"
+        name="add"
+        onClick={(e) => handleClick(e)}
+      >
+        Add Product
+      </Button>
 
       {totalItems ? (
         <Table
@@ -140,178 +146,213 @@ const FilterableProductTable = () => {
         </div>
       )}
 
-      <Modal
-        show={view}
-        onHide={(e) => setView(false)}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Product Description</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Product Name: {currentSelection.name}</p>
-          <p>Product Code: {currentSelection.code}</p>
-          <p>Product Price: ${currentSelection.price}</p>
-          <p>Product Category: {currentSelection.category}</p>
-          <p>Product Date Created: {currentSelection.date}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={(e) => setView(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <>
+        <Modal
+          show={add}
+          onHide={(e) => setAdd(false)}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add Product</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Product Name: </p>
+            <input
+              name="name"
+              type="text"
+              className="form-control"
+              placeholder="Milk"
+              value={currentSelection.name}
+              onChange={handleInputChange}
+            />
 
-      <Modal
-        show={add}
-        onHide={(e) => setAdd(false)}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Product Name: </p>
-          <input 
-            name="name"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+            <p>Product Code: </p>
+            <input
+              name="code"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.code}
+              onChange={handleInputChange}
+            />
 
-          <p>Product Code: </p>
-          <input
-            name="code"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+            <p>Product Price: $</p>
+            <input
+              name="price"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.price}
+              onChange={handleInputChange}
+            />
 
-          <p>Product Price: $</p>
-          <input
-            name="price"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+            <p>Product Category: </p>
 
-          <p>Product Category: </p>
+            <input
+              name="category"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.category}
+              onChange={handleInputChange}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="success"
+              onClick={(e) => {
+                setAdd(false)
+                setList(list.filter((p) => currentSelection.code !== p.code))
+                setList([
+                  ...list,
+                  {
+                    code: currentSelection.code,
+                    name: currentSelection.name,
+                    price: currentSelection.price,
+                    category: currentSelection.category,
+                    imageURL: '',
+                  },
+                ])
+              }}
+            >
+              Add
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={(e) => {
+                setAdd(false)
+              }}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-          <input
-            name="category"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={(e) => setAdd(false)}>
-            Add
-          </Button>
-          <Button variant="secondary" onClick={(e) => setAdd(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal
+          show={view}
+          onHide={(e) => setView(false)}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Product Description</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Product Name: {currentSelection.name}</p>
+            <p>Product Code: {currentSelection.code}</p>
+            <p>Product Price: ${currentSelection.price}</p>
+            <p>Product Category: {currentSelection.category}</p>
+            <p>Product Date Created: {currentSelection.date}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={(e) => setView(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-      <Modal
-        show={edit}
-        onHide={(e) => setEdit(false)}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Product Update</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Product Name: </p>
-          <input 
-            name="name"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+        <Modal
+          show={edit}
+          onHide={(e) => setEdit(false)}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Product Update</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Product Name: </p>
+            <input
+              name="name"
+              type="text"
+              className="form-control"
+              placeholder="Milk"
+              value={currentSelection.name}
+              onChange={handleInputChange}
+            />
 
-          <p>Product Code: </p>
-          <input
-            name="code"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+            <p>Product Code: </p>
+            <input
+              name="code"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.code}
+              onChange={handleInputChange}
+            />
 
-          <p>Product Price: $</p>
-          <input
-            name="price"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
+            <p>Product Price: $</p>
+            <input
+              name="price"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.price}
+              onChange={handleInputChange}
+            />
 
-          <p>Product Category: </p>
+            <p>Product Category: </p>
 
-          <input
-            name="category"
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => handleInputChange(e, results)}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={(e) => setEdit(false)}>
-            Update
-          </Button>
-          <Button variant="secondary" onClick={(e) => setEdit(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            <input
+              name="category"
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={currentSelection.category}
+              onChange={handleInputChange}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="success"
+              onClick={(e) => {
+                setEdit(false)
+                setList(list.filter((p) => currentSelection.code !== p.code))
+              }}
+            >
+              Update
+            </Button>
+            <Button variant="secondary" onClick={(e) => setEdit(false)}>
+              Cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-      <Modal
-        show={remove}
-        onHide={(e) => setRemove(false)}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Are you sure you want to delete this product?
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Product Name: {currentSelection.name}</p>
-          <p>Product Code: {currentSelection.code}</p>
-          <p>Product Price: ${currentSelection.price}</p>
-          <p>Product Category: {currentSelection.category}</p>
-          <p>Product Date Created: {currentSelection.date}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={(e) => setRemove(false)}>
-            Delete
-          </Button>
-          <Button variant="secondary" onClick={(e) => setRemove(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal
+          show={remove}
+          onHide={(e) => setRemove(false)}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Are you sure you want to delete this product?
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Product Name: {currentSelection.name}</p>
+            <p>Product Code: {currentSelection.code}</p>
+            <p>Product Price: ${currentSelection.price}</p>
+            <p>Product Category: {currentSelection.category}</p>
+            <p>Product Date Created: {currentSelection.date}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="danger"
+              onClick={(e) => {
+                setRemove(false)
+                setList(list.filter((p) => currentSelection.code !== p.code))
+              }}
+            >
+              Delete
+            </Button>
+            <Button variant="secondary" onClick={(e) => setRemove(false)}>
+              Cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
 
       <ReactPagination
         total={totalItems}
