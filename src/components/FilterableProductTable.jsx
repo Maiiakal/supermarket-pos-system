@@ -16,12 +16,7 @@ const FilterableProductTable = () => {
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const [currentSelection, setCurrentSelection] = useState({
-    code: '',
-    name: '',
-    price: '',
-    category: '',
-  })
+  const [currentSelection, setCurrentSelection] = useState({})
   const [view, setView] = useState(false)
   const [add, setAdd] = useState(false)
   const [edit, setEdit] = useState(false)
@@ -45,6 +40,12 @@ const FilterableProductTable = () => {
   function handleClick(e, product) {
     if (e.target.name === 'add') {
       setAdd(true)
+      setCurrentSelection({
+        code: '',
+        name: '',
+        price: '',
+        category: '',
+      })
     } else if (e.target.name === 'view') {
       setView(true)
       setCurrentSelection(product)
@@ -272,16 +273,6 @@ const FilterableProductTable = () => {
               onChange={handleInputChange}
             />
 
-            <p>Product Code: </p>
-            <input
-              name="code"
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={currentSelection.code}
-              onChange={handleInputChange}
-            />
-
             <p>Product Price: $</p>
             <input
               name="price"
@@ -308,7 +299,13 @@ const FilterableProductTable = () => {
               variant="success"
               onClick={(e) => {
                 setEdit(false)
-                setList(list.filter((p) => currentSelection.code !== p.code))
+                list.map((p) => {
+                  if (p.code === currentSelection.code) {
+                    p.name = currentSelection.name;
+                    p.price = currentSelection.price;
+                    p.category = currentSelection.category;
+                  }
+                })
               }}
             >
               Update
