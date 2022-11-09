@@ -2,7 +2,7 @@ import '../styles/Table.css'
 import { useState, useMemo } from 'react'
 import ReactPagination from './common/Pagination'
 import Search from './common/Search'
-import { productsGenerator } from './common/Data'
+import { CategoryGenerator } from './common/Data'
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
@@ -10,10 +10,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
 const ITEMS_PER_PAGE = 30
 
-const FilterableProductTable = () => {
+const FilterableCategoryTable = () => {
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(productsGenerator(130))
+  const [list, setList] = useState(CategoryGenerator(130))
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -30,8 +30,8 @@ const FilterableProductTable = () => {
 
     if (search) {
       filteredResult = filteredResult.filter((result) =>
-        result.name.toLowerCase().includes(search.toLowerCase()),
-      )
+        result.name.toLowerCase().includes(search.toLowerCase()))
+      
     }
 
     setTotalItems(filteredResult.length)
@@ -43,24 +43,21 @@ const FilterableProductTable = () => {
   }, [list, currentPage, search])
 
   // one function to handle all click events
-  function handleClick(e, product) {
+  function handleClick(e, category) {
     if (e.target.name === 'add') {
       setAdd(true)
       setCurrentSelection({
-        code: '',
         name: '',
-        price: '',
-        category: '',
       })
     } else if (e.target.name === 'view') {
       setView(true)
-      setCurrentSelection(product)
+      setCurrentSelection(category)
     } else if (e.target.name === 'edit') {
       setEdit(true)
-      setCurrentSelection(product)
+      setCurrentSelection(category)
     } else {
       setRemove(true)
-      setCurrentSelection(product)
+      setCurrentSelection(category)
     }
     return
   }
@@ -85,26 +82,20 @@ const FilterableProductTable = () => {
       >
         <thead>
           <tr>
-            <th>Code</th>
             <th>Name</th>
-            <th>Category</th>
-            <th>Unit Price</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {filtered.map((product) => (
-            <tr key={product.code}>
-              <td>{product.code}</td>
-              <td>{product.name}</td>
-              <td>{product.category}</td>
-              <td>{'$' + product.price}</td>
+          {filtered.map((category) => (
+            <tr key={category.id}>
+              <td>{category.name}</td>
               <td>
                 <Button
                   className="button"
                   variant="primary"
                   name="view"
-                  onClick={(e) => handleClick(e, product)}
+                  onClick={(e) => handleClick(e, category)}
                 >
                   View
                 </Button>
@@ -112,7 +103,7 @@ const FilterableProductTable = () => {
                   className="button"
                   variant="success"
                   name="edit"
-                  onClick={(e) => handleClick(e, product)}
+                  onClick={(e) => handleClick(e, category)}
                 >
                   Edit
                 </Button>
@@ -120,7 +111,7 @@ const FilterableProductTable = () => {
                   className="button"
                   variant="danger"
                   name="delete"
-                  onClick={(e) => handleClick(e, product)}
+                  onClick={(e) => handleClick(e, category)}
                 >
                   Delete
                 </Button>
@@ -134,7 +125,7 @@ const FilterableProductTable = () => {
 
   return (
     <div>
-      <h1 className="title">Product Table</h1>
+      <h1 className="title">Category Table</h1>
 
       <Search
         onSearch={(value) => {
@@ -149,7 +140,7 @@ const FilterableProductTable = () => {
         name="add"
         onClick={(e) => handleClick(e)}
       >
-        Add Product
+        Add Category
       </Button>
 
       {totalItems ? (
@@ -168,19 +159,19 @@ const FilterableProductTable = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add Product</Modal.Title>
+            <Modal.Title>Add Category</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <FloatingLabel
               controlId="floatingInput"
-              label="Product Name"
+              label="Category Name"
               className="mb-3"
             >
               <Form.Control
                 req
                 name="name"
                 type="text"
-                placeholder="Milk"
+                placeholder="Food"
                 value={currentSelection.name}
                 onChange={handleInputChange}
               />
@@ -188,39 +179,7 @@ const FilterableProductTable = () => {
 
             <FloatingLabel
               controlId="floatingInput"
-              label="Unit Price in $"
-              className="mb-3"
-            >
-              <Form.Control
-                req
-                name="price"
-                type="number"
-                placeholder="10"
-                value={currentSelection.price}
-                onChange={handleInputChange}
-              />
-            </FloatingLabel>
-
-            <FloatingLabel
-              controlId="floatingSelect"
-              label="Please select a category"
-            >
-              <Form.Select
-                id="category"
-                name="category"
-                aria-label="Please select a category"
-                onChange={handleInputChange}
-                value={currentSelection.category}
-              >
-                <option value="Food">Food</option>
-                <option value="Beveragres">Beveragres</option>
-                <option value="Snacks">Snacks</option>
-              </Form.Select>
-            </FloatingLabel>
-
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Product Image URL"
+              label="Category Image URL"
               className="mb-3"
             >
               <Form.Control
@@ -238,15 +197,13 @@ const FilterableProductTable = () => {
               variant="success"
               onClick={(e) => {
                 setAdd(false)
-                setList(list.filter((p) => currentSelection.code !== p.code))
+                setList(list.filter((c) => currentSelection.name !== c.name))
                 setList([
                   ...list,
                   {
-                    code: currentSelection.code,
                     name: currentSelection.name,
-                    price: currentSelection.price,
-                    category: currentSelection.category,
                     imageURL: currentSelection.imageURL,
+                    id: list[list.length-1].id+1,
                   },
                 ])
               }}
@@ -271,13 +228,11 @@ const FilterableProductTable = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Product Description</Modal.Title>
+            <Modal.Title>Category Description</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Product Name: {currentSelection.name}</p>
-            <p>Product Code: {currentSelection.code}</p>
-            <p>Product Price: ${currentSelection.price}</p>
-            <p>Product Category: {currentSelection.category}</p>
+            <p>Category Name: {currentSelection.name}</p>
+            <p>Category ID: {currentSelection.id}</p>
             <p>Category image URL: {currentSelection.imageURL}</p>
           </Modal.Body>
           <Modal.Footer>
@@ -294,19 +249,19 @@ const FilterableProductTable = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Product Update</Modal.Title>
+            <Modal.Title>Category Update</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <FloatingLabel
               controlId="floatingInput"
-              label="Product Name"
+              label="Category Name"
               className="mb-3"
             >
               <Form.Control
                 req
                 name="name"
                 type="text"
-                placeholder="Milk"
+                placeholder="Food"
                 value={currentSelection.name}
                 onChange={handleInputChange}
               />
@@ -314,39 +269,7 @@ const FilterableProductTable = () => {
 
             <FloatingLabel
               controlId="floatingInput"
-              label="Unit Price in $"
-              className="mb-3"
-            >
-              <Form.Control
-                req
-                name="price"
-                type="number"
-                placeholder="10"
-                value={currentSelection.price}
-                onChange={handleInputChange}
-              />
-            </FloatingLabel>
-
-            <FloatingLabel
-              controlId="floatingSelect"
-              label="Please select a category"
-            >
-              <Form.Select
-                id="category"
-                name="category"
-                aria-label="Please select a category"
-                onChange={handleInputChange}
-                value={currentSelection.category}
-              >
-                <option value="Food">Food</option>
-                <option value="Beveragres">Beveragres</option>
-                <option value="Snacks">Snacks</option>
-              </Form.Select>
-            </FloatingLabel>
-
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Product Image URL"
+              label="Category Image URL"
               className="mb-3"
             >
               <Form.Control
@@ -365,12 +288,10 @@ const FilterableProductTable = () => {
               onClick={(e) => {
                 setEdit(false)
                 // eslint-disable-next-line
-                list.map((p) => {
-                  if (p.code === currentSelection.code) {
-                    p.name = currentSelection.name
-                    p.price = currentSelection.price
-                    p.category = currentSelection.category
-                    p.imageURL = currentSelection.imageURL
+                list.map((c) => {
+                  if (c.id === currentSelection.id) {
+                    c.name = currentSelection.name
+                    c.imageURL = currentSelection.imageURL
                   }
                 })
               }}
@@ -391,21 +312,19 @@ const FilterableProductTable = () => {
         >
           <Modal.Header closeButton>
             <Modal.Title>
-              Are you sure you want to delete this product?
+              Are you sure you want to delete this?
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Product Name: {currentSelection.name}</p>
-            <p>Product Code: {currentSelection.code}</p>
-            <p>Product Price: ${currentSelection.price}</p>
-            <p>Product Category: {currentSelection.category}</p>
+            <p>Category Name: {currentSelection.name}</p>
+            <p>Category image URL: {currentSelection.imageURL}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button
               variant="danger"
               onClick={(e) => {
                 setRemove(false)
-                setList(list.filter((p) => currentSelection.code !== p.code))
+                setList(list.filter((c) => currentSelection.id !== c.id))
               }}
             >
               Delete
@@ -427,4 +346,4 @@ const FilterableProductTable = () => {
   )
 }
 
-export default FilterableProductTable
+export default FilterableCategoryTable
