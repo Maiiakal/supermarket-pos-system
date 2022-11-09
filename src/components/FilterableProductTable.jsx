@@ -13,17 +13,20 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 const ITEMS_PER_PAGE = 30
 
 const FilterableProductTable = () => {
+  // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(productsGenerator(30))
+  const [list, setList] = useState(productsGenerator(130))
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
+  // CRUD states
   const [currentSelection, setCurrentSelection] = useState({})
-  const [view, setView] = useState(false)
   const [add, setAdd] = useState(false)
+  const [view, setView] = useState(false)
   const [edit, setEdit] = useState(false)
   const [remove, setRemove] = useState(false)
 
+  // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
     let filteredResult = list
 
@@ -39,6 +42,7 @@ const FilterableProductTable = () => {
     )
   }, [list, currentPage, search])
 
+  // one function to handle all click events
   function handleClick(e, product) {
     if (e.target.name === 'add') {
       setAdd(true)
@@ -61,6 +65,7 @@ const FilterableProductTable = () => {
     return
   }
 
+  // one function to handle all input events
   function handleInputChange(e) {
     setCurrentSelection({
       ...currentSelection,
