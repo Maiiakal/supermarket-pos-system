@@ -1,4 +1,4 @@
-# NOTE: Site is under costrction. Please review the issues added to this repository for upcomig updates features.
+# NOTE: Site is under construction. Please review the issues added to this repository for upcomig updates features.
 
 # Netlify Link:
 
