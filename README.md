@@ -2,7 +2,7 @@
 
 # Application Overview
 
-The application is an experminetal React web project for an internship at Foothill. The owner of the supermarket is able to perform CRUD operations on a table of prodcuts and their categories for his business. In addition, his employees at the cashier select a variety of products into a shopping cart where taxes, discounts, and total fees are calculated.
+The application is an experminetal React web project for an internship at Foothill. The owner of the supermarket is able to perform CRUD operations on a table of prodcuts and their categories for their business. In addition, his employees at the cashier select a variety of products into a shopping cart where taxes, discounts, and total fees are calculated.
 
 `NOTE: Site is under construction. Please review the issues added to this repository for upcoming updates and features.`
 
@@ -45,5 +45,4 @@ This project was made using React `18.2.0`.
 
 ## Code Architecture
 
-Several design patterns have researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react).
-
+Several design patterns have been researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react).
