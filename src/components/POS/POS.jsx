@@ -1,13 +1,13 @@
+import Cart from './Cart'
+import DisplayProduct from './DsiplayProduct'
+
 const POS = () => {
+  return (
+    <>
+      <Cart />
+      <DisplayProduct />
+    </>
+  )
+}
 
-    return (
-        <>
-            
-        </>
-    )
-
- }
-
-
- export default POS
-
+export default POS
