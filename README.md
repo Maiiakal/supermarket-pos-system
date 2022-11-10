@@ -12,14 +12,14 @@ The application is an experminetal React web project for an internship at Foothi
 
 The application contains the following models:
 
-- User - can have one of these roles:
+- User can have one of these roles:
 
   - `ADMIN` can:
     - view/create/edit/delete all products
     - search for a product by its code 
     - view/create/edit/delete all product categories
     - search for a category by its name 
-  - `USER` - can:
+  - `USER` can:
     - view/create/edit/delete a shopping cart
     - add products to the shopping cart from a list of products
     - filter a list of products by category
