@@ -1,76 +1,49 @@
+# Supermarket POS System
 
-# Netlify Link:
+# Application Overview
 
-https://sumart.netlify.app/
+The application is an experminetal React web project for an internship at Foothill. The owner of the supermarket is able to perform CRUD operations on a table of prodcuts and their categories for his business. In addition, his employees at the cashier select a variety of products into a shopping cart where taxes, discounts, and total fees are calculated.
 
+`NOTE: Site is under construction. Please review the issues added to this repository for upcoming updates and features.`
 
-# Getting Started with Create React App
+[Demo](https://sumart.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Data model
 
-## Available Scripts
+The application contains the following models:
 
-In the project directory, you can run:
+- User can have one of these roles:
 
-### `npm start`
+  - `ADMIN` can:
+    - view/create/edit/delete all products
+    - search for a product by its code 
+    - view/create/edit/delete all product categories
+    - search for a category by its name 
+  - `USER` can:
+    - view/create/edit/delete a shopping cart
+    - add products to the shopping cart from a list of products
+    - filter a list of products by category
+    - search a list of products by code
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Product: represents an item sold at the supermarket.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Category: represents the classfication that a product must fall in.
 
-### `npm test`
+- Shopping Cart: represents the list of products that are automatically calculated during checkout.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Dependencies used
 
-### `npm run build`
+The application contains the following dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - React Router DOM `6.4.3`
+  - Bootstrap `2.5.0`
+  - Formik `2.2.9`
+  - Immer `9.0.16`
+  - Prettier `2.7.1`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project was made using React `18.2.0`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Code Architecture
 
-### `npm run eject`
+Several design patterns have researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
