@@ -1,31 +1,23 @@
 import '../../styles/Footer.css'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
-    return (
+  return (
     <Navbar bg="light" expand="lg">
-      <Container className="container" >
-        <Navbar.Brand className="brand" href="/">Sumart</Navbar.Brand>
+      <Container className="container">
+        <Navbar.Brand className="brand" href="/">
+          Sumart
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/product-table">Products</Nav.Link>
-            <Nav.Link href="/category-table">Categories</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Link href="/">Home</Link>
+            <Link href="/product-table">Products</Link>
+            <Link href="/category-table">Categories</Link>
+            <Link href="/pos">POS</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -33,4 +25,4 @@ const Footer = () => {
   )
 }
 
-export default Footer;
+export default Footer
