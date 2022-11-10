@@ -206,6 +206,7 @@ const FilterableProductTable = () => {
             <FloatingLabel
               controlId="floatingSelect"
               label="Please select a category"
+              className="mb-3"
             >
               <Form.Select
                 id="category"
@@ -222,7 +223,7 @@ const FilterableProductTable = () => {
 
             <FloatingLabel
               controlId="floatingInput"
-              label="Product Image URL"
+              label="Please enter product image URL"
               className="mb-3"
             >
               <Form.Control
@@ -332,6 +333,7 @@ const FilterableProductTable = () => {
             <FloatingLabel
               controlId="floatingSelect"
               label="Please select a category"
+              className="mb-3"
             >
               <Form.Select
                 id="category"

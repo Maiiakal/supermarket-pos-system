@@ -20,9 +20,24 @@ const NavBar = () => {
             >
               Home
             </NavLink>
-            <NavLink to="/product-table" className={({ isActive }) => (isActive ? 'link-active' : '')}>Products</NavLink>
-            <NavLink to="/category-table" className={({ isActive }) => (isActive ? 'link-active' : '')}>Categories</NavLink>
-            <NavLink to="/pos" className={({ isActive }) => (isActive ? 'link-active' : '')}>POS</NavLink>
+            <NavLink
+              to="/product-table"
+              className={({ isActive }) => (isActive ? 'link-active' : '')}
+            >
+              Products
+            </NavLink>
+            <NavLink
+              to="/category-table"
+              className={({ isActive }) => (isActive ? 'link-active' : '')}
+            >
+              Categories
+            </NavLink>
+            <NavLink
+              to="/pos"
+              className={({ isActive }) => (isActive ? 'link-active' : '')}
+            >
+              POS
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
