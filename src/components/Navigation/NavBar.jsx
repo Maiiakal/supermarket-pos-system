@@ -2,7 +2,7 @@ import '../../styles/NavBar.css'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
   return (
@@ -14,10 +14,15 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/">Home</Link>
-            <Link to="/product-table">Products</Link>
-            <Link to="/category-table">Categories</Link>
-            <Link to="/pos">POS</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? 'link-active' : '')}
+            >
+              Home
+            </NavLink>
+            <NavLink to="/product-table" className={({ isActive }) => (isActive ? 'link-active' : '')}>Products</NavLink>
+            <NavLink to="/category-table" className={({ isActive }) => (isActive ? 'link-active' : '')}>Categories</NavLink>
+            <NavLink to="/pos" className={({ isActive }) => (isActive ? 'link-active' : '')}>POS</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
