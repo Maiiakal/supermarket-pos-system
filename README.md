@@ -31,3 +31,19 @@ The application contains the following models:
 
 - Shopping Cart: represents the list of products that are automatically calculated during checkout.
 
+## Dependencies used
+
+The application contains the following dependencies:
+
+  - React Router DOM `6.4.3`
+  - Bootstrap `2.5.0`
+  - Formik `2.2.9`
+  - Immer `9.0.16`
+  - Prettier `2.7.1`
+
+This project was made using React `18.2.0`.
+
+## Code Architecture
+
+Several design patterns have researched and by far this project was mostly inspired by alan2207 [bulletproof-react](https://github.com/alan2207/bulletproof-react).
+
