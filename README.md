@@ -45,5 +45,5 @@ This project was made using React `18.2.0`.
 
 ## Code Architecture
 
-Several design patterns have researched and by far this project was mostly inspired by alan2207 [bulletproof-react](https://github.com/alan2207/bulletproof-react).
+Several design patterns have researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react).
 
