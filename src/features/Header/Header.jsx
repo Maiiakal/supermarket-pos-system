@@ -1,4 +1,4 @@
-import '../../styles/NavBar.css'
+import '../../assets/styles/NavBar.css'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -33,10 +33,10 @@ const NavBar = () => {
               Categories
             </NavLink>
             <NavLink
-              to="/pos"
+              to="/shopping-cart"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >
-              POS
+              Cart
             </NavLink>
           </Nav>
         </Navbar.Collapse>

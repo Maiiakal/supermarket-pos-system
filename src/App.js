@@ -3,11 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import FilterableProductTable from "./components/FilterableProductTable";
-import FilterableCategoryTable from "./components/FilterableCategoryTable";
-import POS from "./components/POS/POS";
-import NavBar from "./components/Navigation/NavBar";
-import Footer from "./components/Navigation/Footer";
+import FilterableProductTable from "./features/table/FilterableProductTable";
+import FilterableCategoryTable from "./features/table/FilterableCategoryTable";
+import { Cart } from "./features/cart/components/Cart"
+import { List } from "./features/list/components/List";
+
+import NavBar from "./features/Header/Header";
+import Footer from "./features/Footer/Footer";
 
 function App() {
   return (
@@ -17,8 +19,8 @@ function App() {
         <Routes>
           <Route path="/product-table" element={<FilterableProductTable />} />
           <Route path="/category-table" element={<FilterableCategoryTable />} />
-          <Route path="/pos" element={<POS />} />
-          <Route path="/" element={<POS />} />
+          <Route path="/shopping-cart" element={<List />} />
+          <Route path="/" element={[<Cart />, <List />]} />
         </Routes>
         <Footer />
       </BrowserRouter>

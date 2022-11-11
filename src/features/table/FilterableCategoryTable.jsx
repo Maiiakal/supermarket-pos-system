@@ -1,8 +1,8 @@
-import '../styles/Table.css'
+import '../../assets/styles/Table.css'
 import { useState, useMemo } from 'react'
-import ReactPagination from './common/Pagination'
-import Search from './common/Search'
-import { CategoryGenerator } from './common/Data'
+import ReactPagination from './Pagination'
+import Search from './Search'
+import { CategoryGenerator } from '../Data'
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
@@ -30,8 +30,8 @@ const FilterableCategoryTable = () => {
 
     if (search) {
       filteredResult = filteredResult.filter((result) =>
-        result.name.toLowerCase().includes(search.toLowerCase()))
-      
+        result.name.toLowerCase().includes(search.toLowerCase()),
+      )
     }
 
     setTotalItems(filteredResult.length)
@@ -134,7 +134,7 @@ const FilterableCategoryTable = () => {
         }}
       />
 
-       <p className ="serachbox-text">Please search by name!</p>
+      <p className="serachbox-text">Please search by name!</p>
 
       <Button
         variant="outline-primary"
@@ -205,7 +205,7 @@ const FilterableCategoryTable = () => {
                   {
                     name: currentSelection.name,
                     imageURL: currentSelection.imageURL,
-                    id: list[list.length-1].id+1,
+                    id: list[list.length - 1].id + 1,
                   },
                 ])
               }}
@@ -313,9 +313,7 @@ const FilterableCategoryTable = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>
-              Are you sure you want to delete this?
-            </Modal.Title>
+            <Modal.Title>Are you sure you want to delete this?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>Category Name: {currentSelection.name}</p>

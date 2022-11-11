@@ -1,8 +1,8 @@
-import '../styles/Table.css'
+import '../../assets/styles/Table.css'
 import { useState, useMemo } from 'react'
-import ReactPagination from './common/Pagination'
-import Search from './common/Search'
-import { productsGenerator } from './common/Data'
+import ReactPagination from './Pagination'
+import Search from './Search'
+import { productsGenerator } from '../Data'
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
@@ -143,7 +143,7 @@ const FilterableProductTable = () => {
         }}
       />
 
-       <p className ="serachbox-text">Please search by code only!</p>
+      <p className="serachbox-text">Please search by code only!</p>
 
       <Button
         variant="outline-primary"
