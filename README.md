@@ -45,5 +45,14 @@ This project was made using React `18.2.0`.
 
 ## Code Architecture
 
-Several design patterns have been researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react).
+Several design patterns have been researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react). I will copy the key design concepts I tried implementing below.
 
+
+- [⚙️ Project Configuration](docs/project-configuration.md)
+- [👁️ Style Guide](docs/style-guide.md)
+- [🗄️ Project Structure](docs/project-structure.md)
+- [🧱 Components And Styling](docs/components-and-styling.md)
+- [🗃️ State Management](docs/state-management.md)
+- [🧪 Testing](docs/testing.md)
+- [🚄 Performance](docs/performance.md)
+- [🌐 Deployment](docs/deployment.md)
