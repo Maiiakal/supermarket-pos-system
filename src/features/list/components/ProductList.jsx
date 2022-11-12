@@ -7,7 +7,7 @@ const products = ProductsGenerator(130)
 
 export function ProductList() {
   return (
-    <div className=" bg-info">
+    <div className="mb-5">
       <Row className="mb-3 ms-2">
         <Col>
           <h2> Product List</h2>
