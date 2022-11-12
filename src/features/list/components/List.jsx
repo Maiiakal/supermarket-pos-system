@@ -1,7 +1,22 @@
+import ReactCard from '../../../components/Card/Card'
+import { ProductsGenerator, CategoryGenerator } from '../../Data'
+import { Row } from 'react-bootstrap'
+
+const products = ProductsGenerator(130)
+const categories = CategoryGenerator(130)
+
 export function List() {
   return (
-    <>
-      <h1> Hi this List </h1>
-    </>
+    <div className="pt-3">
+      <Layout>
+        {products.map((product) => (
+          <ReactCard key={product.code} props={product} />
+        ))}
+      </Layout>
+    </div>
   )
+}
+
+function Layout({ children }) {
+  return <Row className="ms-4" md={2}>{children}</Row>
 }

@@ -2,7 +2,7 @@ import '../../assets/styles/Table.css'
 import { useState, useMemo } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
-import { productsGenerator } from '../Data'
+import { ProductsGenerator } from '../Data'
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
@@ -13,7 +13,7 @@ const ITEMS_PER_PAGE = 30
 const FilterableProductTable = () => {
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(productsGenerator(130))
+  const [list, setList] = useState(ProductsGenerator(130))
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 

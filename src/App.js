@@ -20,7 +20,7 @@ function App() {
           <Route path="/product-table" element={<FilterableProductTable />} />
           <Route path="/category-table" element={<FilterableCategoryTable />} />
           <Route path="/shopping-cart" element={<List />} />
-          <Route path="/" element={[<Cart />, <List />]} />
+          <Route path="/" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
