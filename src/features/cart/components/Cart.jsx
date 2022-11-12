@@ -16,11 +16,11 @@ export function Cart() {
   return (
     <>
       <Row>
-        <Col className="m-0 p-0" md={9}>
+        <Col className="pe-0" md={9}>
           <List />
         </Col>
 
-        <Col className="m-0 p-0" md={3}>
+        <Col className="px-0" md={3}>
           <CartLayout />
         </Col>
       </Row>

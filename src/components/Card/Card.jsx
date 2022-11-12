@@ -1,21 +1,24 @@
-import { Card } from 'react-bootstrap'
+import { Card as ReactCard } from 'react-bootstrap'
 import './Card.css'
 
 const imageURL =
   'https://wearenotmartha.com/wp-content/uploads/DIY-Rock-Candy-Featured.jpg'
 
-function ReactCard({ props }) {
+
+  // props, card size, image size, image=true/false, title=true/false, text=true/false
+
+export function Card ({ props }) {
   return (
-    <Card className="border-0 card">
-      <Card.Img className="image" variant="top" src={props.imageURL} />
-      <Card.Body>
-        <Card.Title className="title fs-5 text-muted fw-light">
+    <ReactCard className="border-0 card">
+      <ReactCard.Img className="image" variant="top" src={props.imageURL} />
+      <ReactCard.Body>
+        <ReactCard.Title className="title fs-5 text-muted fw-light">
           {props.name}
-        </Card.Title>
-        <Card.Text className="text fs-3 fw-bold">${props.price}</Card.Text>
-      </Card.Body>
-    </Card>
+        </ReactCard.Title>
+        <ReactCard.Text className="text fs-3 fw-bold">${props.price}</ReactCard.Text>
+      </ReactCard.Body>
+    </ReactCard>
   )
 }
 
-export default ReactCard
+export default Card
