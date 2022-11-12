@@ -4,8 +4,8 @@ import { ProductList } from './ProductList'
 export function List() {
   return (
     <>
-      <CategoryList/>
-      <ProductList />
+      <CategoryList />
+      <ProductList/>
     </>
   )
 }
