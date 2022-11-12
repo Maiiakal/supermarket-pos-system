@@ -1,7 +1,6 @@
 import { Card } from 'react-bootstrap'
 import './Card.css'
 
-
 const imageURL =
   'https://wearenotmartha.com/wp-content/uploads/DIY-Rock-Candy-Featured.jpg'
 
