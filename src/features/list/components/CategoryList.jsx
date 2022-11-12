@@ -6,7 +6,7 @@ const categories = CategoryGenerator(10)
 
 export function CategoryList() {
   return (
-    <div className="">
+    <div className="mb-5">
       <h2 className="mb-3 ms-4"> Cateogry List</h2>
       <Layout>
         {categories.map((category) => (
