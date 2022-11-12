@@ -3,11 +3,11 @@ import { ProductsGenerator, CategoryGenerator } from '../../Data'
 import { Row } from 'react-bootstrap'
 
 const products = ProductsGenerator(130)
-const categories = CategoryGenerator(130)
+const categories = CategoryGenerator(10)
 
 export function List() {
   return (
-    <div className="pt-5">
+    <div className=" bg-info pt-5">
       <Layout>
         {products.map((product) => (
           <ReactCard key={product.code} props={product} />
