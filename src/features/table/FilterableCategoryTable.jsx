@@ -181,7 +181,7 @@ const FilterableCategoryTable = () => {
 
             <FloatingLabel
               controlId="floatingInput"
-              label="Category Image URL"
+              label="Category icon URL"
               className="mb-3"
             >
               <Form.Control
@@ -271,7 +271,7 @@ const FilterableCategoryTable = () => {
 
             <FloatingLabel
               controlId="floatingInput"
-              label="Please enter category image URL"
+              label="Category icon URL"
               className="mb-3"
             >
               <Form.Control
