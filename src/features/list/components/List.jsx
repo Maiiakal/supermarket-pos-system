@@ -7,7 +7,7 @@ const categories = CategoryGenerator(130)
 
 export function List() {
   return (
-    <div className="pt-3">
+    <div className="pt-5">
       <Layout>
         {products.map((product) => (
           <ReactCard key={product.code} props={product} />
