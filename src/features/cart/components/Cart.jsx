@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 
 
 
-function Layout() {
+function CartLayout() {
   return (
     <div className="bg-dark h-100">
       
@@ -21,7 +21,7 @@ export function Cart() {
         </Col>
 
         <Col className="m-0 p-0" md={3}>
-          <Layout />
+          <CartLayout />
         </Col>
       </Row>
     </>
