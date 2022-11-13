@@ -1,6 +1,6 @@
 import MiniCard from '../../../components/Card/MiniCard'
 import { CategoryGenerator } from '../../Data'
-import { Row, Col } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 
 const categories = CategoryGenerator(10)
 
