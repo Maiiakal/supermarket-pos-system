@@ -36,7 +36,7 @@ The application contains the following models:
 The application contains the following dependencies:
 
   - React Router DOM `6.4.3`
-  - Bootstrap `2.5.0`
+  - Bootstrap `5.2.2`
   - Formik `2.2.9`
   - Immer `9.0.16`
   - Prettier `2.7.1`
