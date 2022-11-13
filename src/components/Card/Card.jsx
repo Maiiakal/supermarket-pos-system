@@ -1,10 +1,6 @@
 import { Card as ReactCard } from 'react-bootstrap'
 import './Card.css'
 
-const imageURL =
-  'https://wearenotmartha.com/wp-content/uploads/DIY-Rock-Candy-Featured.jpg'
-
-
   // props, card size, image size, image=true/false, title=true/false, text=true/false
 
 export function Card ({ props }) {
