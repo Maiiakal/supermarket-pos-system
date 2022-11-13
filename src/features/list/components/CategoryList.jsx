@@ -7,7 +7,7 @@ const categories = CategoryGenerator(10)
 export function CategoryList() {
   return (
     <div className="mb-5">
-      <h2 className="mb-3 ms-4"> Cateogry List</h2>
+      <h2 className="mb-3 ms-4"> Category List</h2>
       <Layout>
         {categories.map((category) => (
           <MiniCard key={category.id} props={category} total={ categories.length} />
