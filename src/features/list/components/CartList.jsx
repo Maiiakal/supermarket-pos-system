@@ -9,7 +9,7 @@ export function CartList() {
       <h2 className="mb-3 ms-4"> Cart List</h2>
       <Layout>
         {orders.map((order) => (
-          <Card key={order.id} props={order}/>
+            <Card key={order.id} props={order} total={ orders.length} />
         ))}
       </Layout>
     </div>
@@ -20,11 +20,12 @@ function Layout({ children }) {
   return <Row className="ms-4">{children}</Row>
 }
 
-function Card(props) {
+function Card({props, total}) {
   return (
     <>
       <div className="shadow border cardSize">
-        
+        <h6 className="title text-muted fw-light">{props.id}</h6>
+        <h6 className="text text-muted fw-normal">{total} items</h6>
       </div>
     </>
   )
