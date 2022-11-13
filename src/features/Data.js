@@ -25,3 +25,16 @@ export const CategoryGenerator = (quantity) => {
   }
   return categories;
 };
+
+export const OrderGenerator = (quantity) => {
+  const orders = [];
+  for (let i = 0; i < quantity; i++) {
+    orders.push({
+      id: i,
+      items: "",
+      total: "",
+      
+    });
+  }
+  return orders;
+};
