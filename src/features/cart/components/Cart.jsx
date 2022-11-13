@@ -1,16 +1,18 @@
 import { List } from '../../list/components/List'
 import { Row, Col } from 'react-bootstrap'
+import { Form } from 'formik'
+import FormGroup from 'react-bootstrap'
 
-
-
-function CartLayout() {
+function OrderDetail() {
   return (
     <div className="bg-primary h-100">
+      <h2>Order Details</h2>
+
       
+
     </div>
   )
 }
-
 
 export function Cart() {
   return (
@@ -21,7 +23,7 @@ export function Cart() {
         </Col>
 
         <Col className="px-0" md={3}>
-          <CartLayout />
+          <OrderDetail />
         </Col>
       </Row>
     </>
