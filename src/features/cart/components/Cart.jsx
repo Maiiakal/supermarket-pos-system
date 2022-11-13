@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap'
 
 function CartLayout() {
   return (
-    <div className="bg-dark h-100">
+    <div className="bg-primary h-100">
       
     </div>
   )
