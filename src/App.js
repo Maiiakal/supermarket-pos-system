@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilterableProductTable from "./features/table/FilterableProductTable";
 import FilterableCategoryTable from "./features/table/FilterableCategoryTable";
 import { Cart } from "./features/cart/components/Cart"
-import { ProductList } from "./features/list/components/ProductList";
 
 import NavBar from "./features/Header/Header";
 import Footer from "./features/Footer/Footer";
@@ -20,7 +19,7 @@ function App() {
           <Route path="/product-table" element={<FilterableProductTable />} />
           <Route path="/category-table" element={<FilterableCategoryTable />} />
           <Route path="/shopping-cart" element={<Cart />} />
-          <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
