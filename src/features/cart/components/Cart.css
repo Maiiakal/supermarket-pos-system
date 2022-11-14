@@ -1,0 +1,25 @@
+.CartTable {
+    overflow-y: auto;
+}
+
+.table-view {
+    height: 580px;
+    overflow-y: auto;
+}
+
+.items {
+    width: 200px;
+}
+
+.quantity-box {
+    width: 70px;
+}
+
+
+hr {
+    width: 70%;
+    color: rgb(150, 148, 146);
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

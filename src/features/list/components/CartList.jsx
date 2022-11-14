@@ -24,7 +24,7 @@ function Card({props, total}) {
   return (
     <>
       <div className="shadow border cardSize">
-        <h6 className="title text-muted fw-light">{props.id}</h6>
+        <h6 className="title text-muted fw-light">Cart {props.id}</h6>
         <h6 className="text text-muted fw-normal">{total} items</h6>
       </div>
     </>
