@@ -1,5 +1,5 @@
 import { List } from '../../list/components/List'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductsGenerator } from '../../Data'
 import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,7 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './Cart.css'
 
 function OrderDetail() {
-  const [list, setList] = useState(ProductsGenerator(130))
+  const [list, setList] = useState(ProductsGenerator(3))
 
   return (
     <div className="border-start vh-100 p-4 pt-0">
@@ -25,6 +25,10 @@ function ProductTable({ list, setList }) {
   const [discount, setDiscount] = useState(0)
   const [tax, setTax] = useState(0)
   const [total, setTotal] = useState(calcSubTotal(list))
+
+  useEffect(() => {
+    
+  }, []);
 
   return (
     <>
