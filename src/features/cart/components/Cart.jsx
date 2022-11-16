@@ -14,13 +14,16 @@ function OrderDetail() {
     <div className="border-start vh-100 p-4 pt-0">
       <h2 className="mb-3">Order Details</h2>
       <ProductTable list={list} setList={setList} />
-      <Summary list={list} />
     </div>
   )
 }
 
 function ProductTable({ list, setList }) {
   const [isEditable, setIsEditable] = useState(1)
+
+  const [subtotal, setSubtotal] = useState(calcSubTotal(list))
+  const [discount, setDiscount] = useState(0)
+  const [tax, setTax] = useState(0)
   const [total, setTotal] = useState(calcSubTotal(list))
 
   return (
@@ -53,6 +56,7 @@ function ProductTable({ list, setList }) {
                         }
                       })
                       setIsEditable(!isEditable)
+                      setSubtotal(calcSubTotal(list))
                     }}
                   />
                 </td>
@@ -62,9 +66,10 @@ function ProductTable({ list, setList }) {
                     className="button"
                     variant="danger"
                     name="delete"
-                    onClick={(e) =>
+                    onClick={(e) => {
                       setList(list.filter((p) => product.code !== p.code))
-                    }
+                      setSubtotal(calcSubTotal(list))
+                    }}
                   >
                     <FontAwesomeIcon icon={faTrash} size="lg" />
                   </Button>
@@ -75,6 +80,61 @@ function ProductTable({ list, setList }) {
         </Table>
       </div>
       <p className="fs-4 fw-bold m-4 text-center">Total items: {list.length}</p>
+
+      <div className="summary-container">
+        <hr></hr>
+
+        <div className="d-flex mb-3">
+          <div className="ms-5 ps-5 fw-light">Subtotal</div>
+          <div className="mx-auto fw-bold">${subtotal}</div>
+        </div>
+
+        <div className="d-flex mb-3">
+          <div className="ms-5 ps-5 fw-light">Discount %</div>
+
+          <div className="mx-auto fw-bold">
+            <input
+              type="number"
+              className="form-control quantity-box"
+              value={discount}
+              onChange={(e) => {
+                setDiscount(parseInt(e.target.value))
+                setTotal(
+                  subtotal +
+                    ([subtotal * (tax / 100)] -
+                    [(e.target.value / 100) * subtotal])
+                )
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="d-flex mb-3">
+          <div className="me-auto ms-5 ps-5 fw-light">Tax %</div>
+          <div className="me-auto ps-5 fw-bold">
+            <input
+              type="number"
+              className="form-control quantity-box"
+              value={tax}
+              onChange={(e) => {
+                setTax(parseInt(e.target.value))
+                setTotal(
+                  subtotal +
+                    ([subtotal * (e.target.value / 100)] -
+                      [(discount / 100) * subtotal]),
+                )
+              }}
+            />
+          </div>
+        </div>
+
+        <hr></hr>
+
+        <div className="d-flex mb-3">
+          <div className="ms-5 ps-5 fs-4 fw-bold">Total</div>
+          <div className="mx-auto fs-4 fw-bold">${total}</div>
+        </div>
+      </div>
     </>
   )
 }
@@ -86,63 +146,6 @@ function calcSubTotal(list) {
     subtotal += list[index].price * list[index].quantity
   }
   return subtotal
-}
-
-function Summary({ list }) {
-  const [subtotal, setSubtotal] = useState(calcSubTotal(list))
-  const [discount, setDiscount] = useState(0)
-  const [tax, setTax] = useState(0)
-  const [total, setTotal] = useState(0)
-
-
-  return (
-    <div className="summary-container">
-      <hr></hr>
-
-      <div className="d-flex mb-3">
-        <div className="ms-5 ps-5 fw-light">Subtotal</div>
-        <div className="mx-auto fw-bold">${subtotal}</div>
-      </div>
-
-      <div className="d-flex mb-3">
-        <div className="ms-5 ps-5 fw-light">Discount %</div>
-
-        <div className="mx-auto fw-bold">
-          <input
-            type="number"
-            className="form-control quantity-box"
-            value={discount}
-            onChange={(e) => {
-              setDiscount(e.target.value)
-              setTotal(subtotal - discount * subtotal + subtotal * tax)
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="d-flex mb-3">
-        <div className="me-auto ms-5 ps-5 fw-light">Tax %</div>
-        <div className="me-auto ps-5 fw-bold">
-          <input
-            type="number"
-            className="form-control quantity-box"
-            value={tax}
-            onChange={(e) => {
-              setTax(e.target.value)
-              setTotal(subtotal - discount * subtotal + subtotal * tax)
-            }}
-          />
-        </div>
-      </div>
-
-      <hr></hr>
-
-      <div className="d-flex mb-3">
-        <div className="ms-5 ps-5 fs-4 fw-bold">Total</div>
-        <div className="mx-auto fs-4 fw-bold">${total}</div>
-      </div>
-    </div>
-  )
 }
 
 export function Cart() {
