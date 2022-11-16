@@ -55,8 +55,12 @@ function ProductTable({ list, setList }) {
                           p.quantity = e.target.value
                         }
                       })
-                      setIsEditable(!isEditable)
                       setSubtotal(calcSubTotal(list))
+                      setTotal(
+                        calcSubTotal(list) +
+                          ([calcSubTotal(list) * (tax/ 100)] -
+                            [(discount / 100) * calcSubTotal(list)]),
+                      )
                     }}
                   />
                 </td>
@@ -69,6 +73,11 @@ function ProductTable({ list, setList }) {
                     onClick={(e) => {
                       setList(list.filter((p) => product.code !== p.code))
                       setSubtotal(calcSubTotal(list))
+                      setTotal(
+                        calcSubTotal(list) +
+                          ([calcSubTotal(list) * (tax/ 100)] -
+                            [(discount / 100) * calcSubTotal(list)]),
+                      )
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} size="lg" />
@@ -102,7 +111,7 @@ function ProductTable({ list, setList }) {
                 setTotal(
                   subtotal +
                     ([subtotal * (tax / 100)] -
-                    [(e.target.value / 100) * subtotal])
+                      [(e.target.value / 100) * subtotal]),
                 )
               }}
             />
