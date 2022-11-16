@@ -19,16 +19,23 @@ function OrderDetail() {
 }
 
 function ProductTable({ list, setList }) {
-  const [isEditable, setIsEditable] = useState(1)
-
   const [subtotal, setSubtotal] = useState(calcSubTotal(list))
   const [discount, setDiscount] = useState(0)
   const [tax, setTax] = useState(0)
   const [total, setTotal] = useState(calcSubTotal(list))
 
   useEffect(() => {
-    
-  }, []);
+    setSubtotal(calcSubTotal(list))
+  }, [list], [subtotal])
+
+  useEffect(
+    () => {
+      console.log("discount--> " + discount + "\ntax---> " + tax)
+      setTotal(
+        subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
+      )
+      
+    }, [discount, tax])
 
   return (
     <>
@@ -60,11 +67,6 @@ function ProductTable({ list, setList }) {
                         }
                       })
                       setSubtotal(calcSubTotal(list))
-                      setTotal(
-                        calcSubTotal(list) +
-                          ([calcSubTotal(list) * (tax/ 100)] -
-                            [(discount / 100) * calcSubTotal(list)]),
-                      )
                     }}
                   />
                 </td>
@@ -76,12 +78,6 @@ function ProductTable({ list, setList }) {
                     name="delete"
                     onClick={(e) => {
                       setList(list.filter((p) => product.code !== p.code))
-                      setSubtotal(calcSubTotal(list))
-                      setTotal(
-                        calcSubTotal(list) +
-                          ([calcSubTotal(list) * (tax/ 100)] -
-                            [(discount / 100) * calcSubTotal(list)]),
-                      )
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} size="lg" />
@@ -112,11 +108,6 @@ function ProductTable({ list, setList }) {
               value={discount}
               onChange={(e) => {
                 setDiscount(parseInt(e.target.value))
-                setTotal(
-                  subtotal +
-                    ([subtotal * (tax / 100)] -
-                      [(e.target.value / 100) * subtotal]),
-                )
               }}
             />
           </div>
@@ -131,11 +122,6 @@ function ProductTable({ list, setList }) {
               value={tax}
               onChange={(e) => {
                 setTax(parseInt(e.target.value))
-                setTotal(
-                  subtotal +
-                    ([subtotal * (e.target.value / 100)] -
-                      [(discount / 100) * subtotal]),
-                )
               }}
             />
           </div>
