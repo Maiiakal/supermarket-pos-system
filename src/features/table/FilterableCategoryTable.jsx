@@ -136,14 +136,18 @@ const FilterableCategoryTable = () => {
 
       <p className="serachbox-text">Please search by name!</p>
 
-      <Button
+      <div class="me-5 d-flex justify-content-end">
+        <Button
         variant="outline-primary"
-        className="addbtn"
+        className=""
         name="add"
         onClick={(e) => handleClick(e)}
       >
         Add Category
       </Button>
+       </div>
+
+      
 
       {totalItems ? (
         generateTable()

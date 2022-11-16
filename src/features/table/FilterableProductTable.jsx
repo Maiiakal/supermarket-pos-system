@@ -145,14 +145,16 @@ const FilterableProductTable = () => {
 
       <p className="serachbox-text">Please search by code only!</p>
 
-      <Button
-        variant="outline-primary"
-        className="addbtn"
-        name="add"
-        onClick={(e) => handleClick(e)}
-      >
-        Add Product
-      </Button>
+      <div class="me-5 d-flex justify-content-end">
+        <Button
+          variant="outline-primary"
+          className="addBtn"
+          name="add"
+          onClick={(e) => handleClick(e)}
+        >
+          Add Product
+        </Button>
+      </div>
 
       {totalItems ? (
         generateTable()

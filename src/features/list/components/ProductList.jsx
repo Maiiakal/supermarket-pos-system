@@ -15,7 +15,7 @@ export function ProductList() {
         <Col>
           <h2> Product List</h2>
         </Col>
-        <Col className=" me-5 d-flex align-items-end flex-column">
+        <Col className="me-5 d-flex align-items-end flex-column">
           <Search
             onSearch={(value) => {
               setSearch(value)
