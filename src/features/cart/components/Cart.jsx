@@ -26,11 +26,13 @@ function ProductTable({ list, setList }) {
 
   useEffect(() => {
     setSubtotal(calcSubTotal(list))
-  }, [list], [subtotal])
+    setTotal(
+        subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
+      )
+  }, [list, subtotal])
 
   useEffect(
     () => {
-      console.log("discount--> " + discount + "\ntax---> " + tax)
       setTotal(
         subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
       )
