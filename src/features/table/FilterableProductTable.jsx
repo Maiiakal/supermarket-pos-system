@@ -8,12 +8,35 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
-const ITEMS_PER_PAGE = 30
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from '../../stores/ducks/products'
 
 const FilterableProductTable = () => {
+  const ITEMS_PER_PAGE = 30
+  const dispatch = useDispatch()
+
+  // REDUX
+  const productList = useSelector((state) => state.products.list)
+
+  const handleCreateProduct = (product) => {
+    dispatch(createProduct(product))
+  }
+
+  const handleUpdateProduct = (product) => {
+    dispatch(updateProduct(product))
+  }
+
+  const handleDeleteProduct = (product) => {
+    dispatch(deleteProduct(product))
+  }
+
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(ProductsGenerator(130))
+  const [list, setList] = useState(productList)
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 

@@ -9,8 +9,7 @@ import { Cart } from "./features/cart/components/Cart";
 
 import NavBar from "./features/Header/Header";
 import Footer from "./features/Footer/Footer";
-import {Provider} from "react-redux";
-import Store from "./stores/configureStore"
+
 
 function App() {
   return (

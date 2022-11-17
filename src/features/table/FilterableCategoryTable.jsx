@@ -3,17 +3,40 @@ import { useState, useMemo } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
 import { CategoryGenerator } from '../Data'
+
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
-const ITEMS_PER_PAGE = 30
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from '../../stores/ducks/categories'
 
 const FilterableCategoryTable = () => {
+  const ITEMS_PER_PAGE = 30
+  const dispatch = useDispatch()
+
+  // REDUX
+  const categoryList = useSelector((state) => state.categories.list)
+
+  const handleCreateCategory = (product) => {
+    dispatch(createCategory(product))
+  }
+
+  const handleUpdateCategory = (product) => {
+    dispatch(updateCategory(product))
+  }
+  const handleDeleteCategory = (product) => {
+    dispatch(deleteCategory(product))
+  }
+
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(CategoryGenerator(130))
+  const [list, setList] = useState(categoryList)
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -138,16 +161,14 @@ const FilterableCategoryTable = () => {
 
       <div class="me-5 d-flex justify-content-end">
         <Button
-        variant="outline-primary"
-        className="addBtn"
-        name="add"
-        onClick={(e) => handleClick(e)}
-      >
-        Add Category
-      </Button>
-       </div>
-
-      
+          variant="outline-primary"
+          className="addBtn"
+          name="add"
+          onClick={(e) => handleClick(e)}
+        >
+          Add Category
+        </Button>
+      </div>
 
       {totalItems ? (
         generateTable()
