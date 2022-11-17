@@ -139,7 +139,7 @@ const FilterableCategoryTable = () => {
       <div class="me-5 d-flex justify-content-end">
         <Button
         variant="outline-primary"
-        className=""
+        className="addBtn"
         name="add"
         onClick={(e) => handleClick(e)}
       >
