@@ -4,10 +4,12 @@ import { Row, Col } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState } from 'react'
 
-const products = ProductsGenerator(130)
+import { useSelector } from 'react-redux'
 
 export function ProductList() {
   const [search, setSearch] = useState('')
+
+  const productList = useSelector((state) => state.products.list)
 
   return (
     <div className="mb-5">
@@ -24,7 +26,7 @@ export function ProductList() {
         </Col>
       </Row>
       <Layout>
-        {products.map((product) => (
+        {productList.map((product) => (
           <Card key={product.code} props={product} />
         ))}
       </Layout>

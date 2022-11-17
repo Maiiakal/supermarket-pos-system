@@ -1,16 +1,21 @@
 import MiniCard from '../../../components/Card/MiniCard'
 import { CategoryGenerator } from '../../Data'
 import { Row } from 'react-bootstrap'
-
-const categories = CategoryGenerator(10)
+import { useSelector } from 'react-redux'
 
 export function CategoryList() {
+  const categoryList = useSelector((state) => state.categories.list)
+
   return (
     <div className="mb-5">
       <h2 className="mb-3 ms-4"> Category List</h2>
       <Layout>
-        {categories.map((category) => (
-          <MiniCard key={category.id} props={category} total={ categories.length} />
+        {categoryList.map((category) => (
+          <MiniCard
+            key={category.id}
+            props={category}
+            total={categoryList.length}
+          />
         ))}
       </Layout>
     </div>
