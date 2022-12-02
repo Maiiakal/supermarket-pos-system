@@ -54,5 +54,3 @@ Several design patterns have been researched and by far this project was mostly 
 - [🧱 Components And Styling](docs/components-and-styling.md)
 - [🗃️ State Management](docs/state-management.md)
 - [🧪 Testing](docs/testing.md)
-- [🚄 Performance](docs/performance.md)
-- [🌐 Deployment](docs/deployment.md)
