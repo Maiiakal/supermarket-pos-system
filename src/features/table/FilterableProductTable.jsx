@@ -41,7 +41,6 @@ const FilterableProductTable = () => {
 
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(productList)
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -68,7 +67,7 @@ const FilterableProductTable = () => {
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
     )
-  }, [list, currentPage, search])
+  }, [productList, currentPage, search])
 
   // one function to handle all click events
   function handleClick(e, product) {
@@ -121,7 +120,7 @@ const FilterableProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          {productList.map((product) => (
+          {filtered.map((product) => (
             <tr key={product.code}>
               <td>{product.code}</td>
               <td>{product.name}</td>

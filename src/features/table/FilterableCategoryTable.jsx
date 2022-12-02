@@ -35,7 +35,6 @@ const FilterableCategoryTable = () => {
 
   // paginations states
   const [search, setSearch] = useState('')
-  const [list, setList] = useState(categoryList)
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -45,10 +44,6 @@ const FilterableCategoryTable = () => {
   const [view, setView] = useState(false)
   const [edit, setEdit] = useState(false)
   const [remove, setRemove] = useState(false)
-
-  useEffect(() => {
-    setList(categoryList)
-  }, [categoryList, list, setList])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
@@ -66,7 +61,7 @@ const FilterableCategoryTable = () => {
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
     )
-  }, [list, currentPage, search])
+  }, [categoryList, currentPage, search])
 
   // one function to handle all click events
   function handleClick(e, category) {
@@ -230,7 +225,7 @@ const FilterableCategoryTable = () => {
                 handleCreateCategory({
                     name: currentSelection.name,
                     imageURL: currentSelection.imageURL,
-                    id: list[list.length - 1].id + 1,
+                    id: categoryList[categoryList.length - 1].id + 1,
                   })
               }}
             >
