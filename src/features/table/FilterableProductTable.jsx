@@ -1,5 +1,5 @@
 import '../../assets/styles/Table.css'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
 import { Button, Modal } from 'react-bootstrap'
@@ -7,7 +7,11 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {
+  faEye,
+  faPenToSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -20,9 +24,6 @@ const FilterableProductTable = () => {
   const ITEMS_PER_PAGE = 30
   const dispatch = useDispatch()
 
-  // REDUX
-  const productList = useSelector((state) => state.products.list)
-
   const handleCreateProduct = (product) => {
     dispatch(createProduct(product))
   }
@@ -34,6 +35,9 @@ const FilterableProductTable = () => {
   const handleDeleteProduct = (product) => {
     dispatch(deleteProduct(product))
   }
+
+  // REDUX
+  const productList = useSelector((state) => state.products.list)
 
   // paginations states
   const [search, setSearch] = useState('')
@@ -50,7 +54,7 @@ const FilterableProductTable = () => {
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
-    let filteredResult = list
+    let filteredResult = productList
 
     if (search) {
       filteredResult = filteredResult.filter((result) =>
@@ -117,7 +121,7 @@ const FilterableProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filtered.map((product) => (
+          {productList.map((product) => (
             <tr key={product.code}>
               <td>{product.code}</td>
               <td>{product.name}</td>
@@ -130,8 +134,7 @@ const FilterableProductTable = () => {
                   name="view"
                   onClick={(e) => handleClick(e, product)}
                 >
-                  <FontAwesomeIcon icon={faEye} className="mx-2" size="lg"/>
-                  
+                  <FontAwesomeIcon icon={faEye} className="mx-2" size="lg" />
                 </Button>
                 <Button
                   className="button"
@@ -139,7 +142,11 @@ const FilterableProductTable = () => {
                   name="edit"
                   onClick={(e) => handleClick(e, product)}
                 >
-                  <FontAwesomeIcon icon={faPenToSquare} className="mx-2" size="lg" />                  
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    className="mx-2"
+                    size="lg"
+                  />
                 </Button>
                 <Button
                   className="button"
@@ -148,7 +155,6 @@ const FilterableProductTable = () => {
                   onClick={(e) => handleClick(e, product)}
                 >
                   <FontAwesomeIcon icon={faTrash} className="mx-2" />
-                  
                 </Button>
               </td>
             </tr>
@@ -160,7 +166,7 @@ const FilterableProductTable = () => {
 
   return (
     <div>
-      <h1 className="title">Product Table</h1>
+      <h1 className="table-heading">Product Table</h1>
 
       <Search
         onSearch={(value) => {
@@ -201,6 +207,21 @@ const FilterableProductTable = () => {
             <Modal.Title>Add Product</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Product Code"
+              className="mb-3"
+            >
+              <Form.Control
+                req
+                name="code"
+                type="text"
+                placeholder="Code"
+                value={currentSelection.code}
+                onChange={handleInputChange}
+              />
+            </FloatingLabel>
+
             <FloatingLabel
               controlId="floatingInput"
               label="Product Name"
@@ -269,17 +290,13 @@ const FilterableProductTable = () => {
               variant="success"
               onClick={(e) => {
                 setAdd(false)
-                setList(list.filter((p) => currentSelection.code !== p.code))
-                setList([
-                  ...list,
-                  {
-                    code: currentSelection.code,
-                    name: currentSelection.name,
-                    price: currentSelection.price,
-                    category: currentSelection.category,
-                    imageURL: currentSelection.imageURL,
-                  },
-                ])
+                handleCreateProduct({
+                  code: currentSelection.code,
+                  name: currentSelection.name,
+                  price: currentSelection.price,
+                  category: currentSelection.category,
+                  imageURL: currentSelection.imageURL,
+                })
               }}
             >
               Add
@@ -397,15 +414,6 @@ const FilterableProductTable = () => {
               onClick={(e) => {
                 setEdit(false)
                 handleUpdateProduct(currentSelection)
-                // // eslint-disable-next-line
-                // list.map((p) => {
-                //   if (p.code === currentSelection.code) {
-                //     p.name = currentSelection.name
-                //     p.price = currentSelection.price
-                //     p.category = currentSelection.category
-                //     p.imageURL = currentSelection.imageURL
-                //   }
-                // })
               }}
             >
               Update
@@ -439,7 +447,6 @@ const FilterableProductTable = () => {
               onClick={(e) => {
                 setRemove(false)
                 handleDeleteProduct(currentSelection)
-                // setList(list.filter((p) => currentSelection.code !== p.code))
               }}
             >
               Delete

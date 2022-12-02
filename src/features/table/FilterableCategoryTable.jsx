@@ -1,8 +1,7 @@
 import '../../assets/styles/Table.css'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
-import { CategoryGenerator } from '../Data'
 
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
@@ -47,9 +46,13 @@ const FilterableCategoryTable = () => {
   const [edit, setEdit] = useState(false)
   const [remove, setRemove] = useState(false)
 
+  useEffect(() => {
+    setList(categoryList)
+  }, [categoryList, list, setList])
+
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
-    let filteredResult = list
+    let filteredResult = categoryList
 
     if (search) {
       filteredResult = filteredResult.filter((result) =>
@@ -148,7 +151,7 @@ const FilterableCategoryTable = () => {
 
   return (
     <div>
-      <h1 className="title">Category Table</h1>
+      <h1 className="table-heading">Category Table</h1>
 
       <Search
         onSearch={(value) => {
@@ -224,15 +227,11 @@ const FilterableCategoryTable = () => {
               variant="success"
               onClick={(e) => {
                 setAdd(false)
-                setList(list.filter((c) => currentSelection.name !== c.name))
-                setList([
-                  ...list,
-                  {
+                handleCreateCategory({
                     name: currentSelection.name,
                     imageURL: currentSelection.imageURL,
                     id: list[list.length - 1].id + 1,
-                  },
-                ])
+                  })
               }}
             >
               Add
@@ -314,13 +313,7 @@ const FilterableCategoryTable = () => {
               variant="success"
               onClick={(e) => {
                 setEdit(false)
-                // eslint-disable-next-line
-                list.map((c) => {
-                  if (c.id === currentSelection.id) {
-                    c.name = currentSelection.name
-                    c.imageURL = currentSelection.imageURL
-                  }
-                })
+                handleUpdateCategory(currentSelection)
               }}
             >
               Update
@@ -349,7 +342,7 @@ const FilterableCategoryTable = () => {
               variant="danger"
               onClick={(e) => {
                 setRemove(false)
-                setList(list.filter((c) => currentSelection.id !== c.id))
+                handleDeleteCategory(currentSelection)
               }}
             >
               Delete

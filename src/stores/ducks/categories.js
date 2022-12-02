@@ -20,7 +20,7 @@ export const deleteCategory = (category) => ({
 });
 
 const initialState = {
-  list: CategoryGenerator(15),
+  list: CategoryGenerator(3),
 };
 
 export default (state = initialState, action) => {
@@ -28,19 +28,24 @@ export default (state = initialState, action) => {
     case CREATE_CATEGORY:
       return {
         ...state,
+        list: state.list.filter(
+          (category) => action.category.id !== category.id
+        ),
         list: [...state.list, { ...action.category }],
       };
     case UPDATE_CATEGORY:
       return {
         ...state,
-        list: state.list.map((category, index) =>
-          index === action.index ? { ...action.category } : category
+        list: state.list.map((category) =>
+          category.id === action.category.id ? action.category : category
         ),
       };
     case DELETE_CATEGORY:
       return {
         ...state,
-        list: state.list.filter((category, index) => index !== action.index),
+        list: state.list.filter(
+          (category) => action.category.id !== category.id
+        ),
       };
     default:
       return state;

@@ -1,6 +1,7 @@
-.title {
+.table-heading {
     margin-top: 1em;
-    text-align: center;
+    margin-bottom: 1em;
+text-align: center;
 }
 
 .table-container {
@@ -23,13 +24,13 @@
 .searchbox {
     width: 260px;
     margin-top: 1em;
-    margin-left: 14em;
+    margin-left: 16em;
 }
 
 
 .serachbox-text {
     margin-top: 1em;
-    margin-left: 14em;
+    margin-left: 16em;
 }
 
 .addBtn {

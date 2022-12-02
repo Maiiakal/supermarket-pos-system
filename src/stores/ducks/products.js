@@ -23,6 +23,7 @@ const initialState = {
   list: ProductsGenerator(30),
 };
 
+// reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_PRODUCT:
@@ -33,14 +34,18 @@ export default (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
-        list: state.list.map((product, index) =>
-          index === action.index ? { ...action.product } : product
+        list: state.list.map((product) =>
+          product.code === action.product.code
+            ? action.product
+            : product
         ),
       };
     case DELETE_PRODUCT:
       return {
         ...state,
-        list: state.list.filter((product, index) => index !== action.index),
+        list: state.list.filter(
+          (product) => action.product.code !== product.code
+        ),
       };
     default:
       return state;

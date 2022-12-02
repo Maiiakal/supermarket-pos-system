@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import FilterableProductTable from "./features/table/FilterableProductTable";
 import FilterableCategoryTable from "./features/table/FilterableCategoryTable";
-import { Cart } from "./features/cart/components/Cart";
+import { Cart } from "./features/cart/components/OrderDetails";
 
 import NavBar from "./features/Header/Header";
 import Footer from "./features/Footer/Footer";

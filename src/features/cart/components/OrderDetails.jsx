@@ -1,14 +1,14 @@
-import { List } from '../../list/components/List'
+import { List } from './List'
 import { useEffect, useState } from 'react'
 import { ProductsGenerator } from '../../Data'
 import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import './Cart.css'
+import './OrderDetails.css'
 
 function OrderDetail() {
-  const [list, setList] = useState(ProductsGenerator(3))
+  const [list, setList] = useState(ProductsGenerator(30))
 
   return (
     <div className="border-start vh-100 p-4 pt-0">
