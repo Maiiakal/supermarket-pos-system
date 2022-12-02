@@ -2,11 +2,12 @@ import '../../assets/styles/Table.css'
 import { useState, useMemo } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
-import { ProductsGenerator } from '../Data'
 import { Button, Modal } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -129,7 +130,8 @@ const FilterableProductTable = () => {
                   name="view"
                   onClick={(e) => handleClick(e, product)}
                 >
-                  View
+                  <FontAwesomeIcon icon={faEye} className="mx-2" size="lg"/>
+                  
                 </Button>
                 <Button
                   className="button"
@@ -137,7 +139,7 @@ const FilterableProductTable = () => {
                   name="edit"
                   onClick={(e) => handleClick(e, product)}
                 >
-                  Edit
+                  <FontAwesomeIcon icon={faPenToSquare} className="mx-2" size="lg" />                  
                 </Button>
                 <Button
                   className="button"
@@ -145,7 +147,8 @@ const FilterableProductTable = () => {
                   name="delete"
                   onClick={(e) => handleClick(e, product)}
                 >
-                  Delete
+                  <FontAwesomeIcon icon={faTrash} className="mx-2" />
+                  
                 </Button>
               </td>
             </tr>
@@ -393,15 +396,16 @@ const FilterableProductTable = () => {
               variant="success"
               onClick={(e) => {
                 setEdit(false)
-                // eslint-disable-next-line
-                list.map((p) => {
-                  if (p.code === currentSelection.code) {
-                    p.name = currentSelection.name
-                    p.price = currentSelection.price
-                    p.category = currentSelection.category
-                    p.imageURL = currentSelection.imageURL
-                  }
-                })
+                handleUpdateProduct(currentSelection)
+                // // eslint-disable-next-line
+                // list.map((p) => {
+                //   if (p.code === currentSelection.code) {
+                //     p.name = currentSelection.name
+                //     p.price = currentSelection.price
+                //     p.category = currentSelection.category
+                //     p.imageURL = currentSelection.imageURL
+                //   }
+                // })
               }}
             >
               Update
@@ -434,7 +438,8 @@ const FilterableProductTable = () => {
               variant="danger"
               onClick={(e) => {
                 setRemove(false)
-                setList(list.filter((p) => currentSelection.code !== p.code))
+                handleDeleteProduct(currentSelection)
+                // setList(list.filter((p) => currentSelection.code !== p.code))
               }}
             >
               Delete
