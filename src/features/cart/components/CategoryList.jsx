@@ -1,18 +1,31 @@
 import { useSelector } from 'react-redux'
-import { OrderGenerator } from '../../Data'
 import Button from 'react-bootstrap/Button'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faGlobe, faBorderAll, faTags } from '@fortawesome/free-solid-svg-icons'
+
+//<FontAwesomeIcon icon="fa-sharp fa-solid fa-tags" />
 
 export function CategoryList() {
   const categoryList = useSelector((state) => state.categories.list)
 
   return (
     <div className="mb-5 ms-4">
-      <h2 className="mb-3"> Categories {'(' + categoryList.length + ')'}</h2>
+      <h2 className="mb-3"><FontAwesomeIcon icon={faTags} size="lg" /> Categories {'(' + categoryList.length + ')'}
+       </h2>
       <div className="cartList-view">
+        <Button
+          id="-1"
+          className="me-2 ms-1 mb-3 rounded-2"
+          variant="outline-dark"
+          value="-1"
+          onClick={(e) => {
+            // add new cart to list
+          }}
+        >
+         <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
+        </Button>
         <ToggleButtonGroup type="radio" name="categories" defaultValue={0}>
           {categoryList.map((category) => (
             <ToggleButton
@@ -21,7 +34,7 @@ export function CategoryList() {
               variant="outline-primary"
               value={category.id}
             >
-              {category.name} {' (' + category.categoryList + ')'}
+              {category.name} {' (' + categoryList.length + ')'}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>

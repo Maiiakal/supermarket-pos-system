@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCartPlus, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import './Cart.css'
 
 const cart = OrderGenerator(1)
@@ -11,7 +11,9 @@ const cart = OrderGenerator(1)
 export function CartList() {
   return (
     <div className="mb-5 ms-4">
-      <h2 className="mb-3"> Carts {'(' + cart.length + ')'}</h2>
+      <h2 className="mb-3"><FontAwesomeIcon icon={faCartShopping} size="lg" /> Carts {'(' + cart.length + ') '}
+        
+      </h2>
       <div className="cartList-view">
         <ToggleButtonGroup type="radio" name="carts" defaultValue={0}>
           {cart.map((cart) => (
