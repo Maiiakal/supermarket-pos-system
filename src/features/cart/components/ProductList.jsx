@@ -27,6 +27,10 @@ export function ProductList() {
           selectedCategory === result.category &&
           result.name.toLowerCase().includes(search.toLowerCase()),
       )
+    } else {
+      filteredResult = filteredResult.filter((result) =>
+        result.name.toLowerCase().includes(search.toLowerCase()),
+      )
     }
 
     return filteredResult
