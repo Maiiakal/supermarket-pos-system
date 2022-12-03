@@ -1,7 +1,7 @@
 import Card from '../../../components/Card/Card'
 import { Row, Col } from 'react-bootstrap'
 import Search from '../../table/Search'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 

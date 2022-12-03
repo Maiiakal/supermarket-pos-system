@@ -11,9 +11,6 @@ export function CategoryList() {
   // REDUX
   const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.categories.list)
-  const selectedCategory = useSelector(
-    (state) => state.categories.selectedCategory,
-  )
 
   const handleUpdateselectedCategory = (category) => {
     dispatch(updateSelectedCategory(category))

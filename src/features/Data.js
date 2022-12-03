@@ -27,13 +27,13 @@ export const CategoryGenerator = (quantity) => {
   return categories;
 };
 
-export const OrderGenerator = (quantity) => {
-  const orders = [];
+export const CartGenerator = (quantity) => {
+  const carts = [];
   for (let i = 0; i < quantity; i++) {
-    orders.push({
+    carts.push({
       id: i,
       items: ProductsGenerator(10),
     });
   }
-  return orders;
+  return carts;
 };

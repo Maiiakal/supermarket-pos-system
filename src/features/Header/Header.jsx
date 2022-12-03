@@ -15,12 +15,6 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? 'link-active' : '')}
-            >
-              Home
-            </NavLink>
-            <NavLink
               to="/product-table"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >

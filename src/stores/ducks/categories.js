@@ -27,7 +27,7 @@ export const updateSelectedCategory = (categoryName) => ({
 });
 
 const initialState = {
-  list: CategoryGenerator(3),
+  list: CategoryGenerator(10),
   selectedCategory: "All Categories",
 };
 
