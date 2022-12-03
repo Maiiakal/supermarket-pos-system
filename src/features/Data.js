@@ -32,9 +32,7 @@ export const OrderGenerator = (quantity) => {
   for (let i = 0; i < quantity; i++) {
     orders.push({
       id: i,
-      items: "",
-      total: "",
-      
+      items: ProductsGenerator(10),
     });
   }
   return orders;

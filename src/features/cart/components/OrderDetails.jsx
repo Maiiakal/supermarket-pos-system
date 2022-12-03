@@ -90,7 +90,7 @@ function ProductTable({ list, setList }) {
           </tbody>
         </Table>
       </div>
-      <p className="fs-4 fw-bold m-4 text-center">Total items: {list.length}</p>
+      <p className="fs-5 fw-bold m-4 text-center">Total items: {list.length}</p>
 
       <div className="summary-container">
         <hr></hr>
