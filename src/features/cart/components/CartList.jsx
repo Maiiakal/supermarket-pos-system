@@ -6,22 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import './Cart.css'
 
-const orders = OrderGenerator(2)
+const cart = OrderGenerator(1)
 
 export function CartList() {
   return (
     <div className="mb-5 ms-4">
-      <h2 className="mb-3"> Cart List {'(' + orders.length + ')'}</h2>
+      <h2 className="mb-3"> Carts {'(' + cart.length + ')'}</h2>
       <div className="cartList-view">
         <ToggleButtonGroup type="radio" name="carts" defaultValue={0}>
-          {orders.map((order) => (
+          {cart.map((cart) => (
             <ToggleButton
-              id={order.id}
+              id={10}
               className="me-2 ms-1 mb-3 rounded-2"
               variant="outline-primary"
-              value={order.id}
+              value={10}
             >
-              {'Cart ' + order.id} {' (' + order.items.length + ')'}
+              {'Cart ' + cart.id} {' (' + cart.items.length + ')'}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
@@ -32,7 +32,7 @@ export function CartList() {
           variant="outline-dark"
           value="-1"
           onClick={(e) => {
-            
+            // add new cart to list
           }}
         >
           <FontAwesomeIcon icon={faCartPlus} size="lg" />
