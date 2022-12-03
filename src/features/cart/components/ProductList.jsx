@@ -22,14 +22,11 @@ export function ProductList() {
     let filteredResult = list
 
     if (!selectedCategory.includes('All Categories')) {
-      filteredResult = filteredResult.filter((result) => {
-        console.log(
-          selectedCategory &&
-            result.name.toLowerCase().includes(search.toLowerCase()),
-        )
-        selectedCategory === result.category &&
-          result.name.toLowerCase().includes(search.toLowerCase())
-      })
+      filteredResult = filteredResult.filter(
+        (result) =>
+          selectedCategory === result.category &&
+          result.name.toLowerCase().includes(search.toLowerCase()),
+      )
     }
 
     return filteredResult
