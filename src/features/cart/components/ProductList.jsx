@@ -1,21 +1,45 @@
 import Card from '../../../components/Card/Card'
-import { ProductsGenerator } from '../../Data'
 import { Row, Col } from 'react-bootstrap'
 import Search from '../../table/Search'
-import { useState } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 export function ProductList() {
+  // REDUX
+  const dispatch = useDispatch()
+  const productList = useSelector((state) => state.products.list)
+  const selectedCategory = useSelector(
+    (state) => state.categories.selectedCategory,
+  )
+
+  // use State
+  const [list, setList] = useState(productList)
   const [search, setSearch] = useState('')
 
-  const productList = useSelector((state) => state.products.list)
+  // returns the currently viewed list with and without search parameters
+  const filtered = useMemo(() => {
+    let filteredResult = list
+
+    if (!selectedCategory.includes('All Categories')) {
+      filteredResult = filteredResult.filter((result) => {
+        console.log(
+          selectedCategory &&
+            result.name.toLowerCase().includes(search.toLowerCase()),
+        )
+        selectedCategory === result.category &&
+          result.name.toLowerCase().includes(search.toLowerCase())
+      })
+    }
+
+    return filteredResult
+  }, [selectedCategory, productList, search])
 
   return (
     <div className="mb-5">
       <Row className="mb-3 ms-2">
         <Col>
-          <h2 className="mb-3">Products {'(' + productList.length + ')'}</h2>
+          <h2 className="mb-3">Products {'(' + filtered.length + ')'}</h2>
         </Col>
         <Col className="me-5 d-flex align-items-end flex-column">
           <Search
@@ -26,7 +50,7 @@ export function ProductList() {
         </Col>
       </Row>
       <Layout>
-        {productList.map((product) => (
+        {filtered.map((product) => (
           <Card key={product.code} props={product} />
         ))}
       </Layout>

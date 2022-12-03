@@ -17,9 +17,9 @@ import {
 
 const FilterableCategoryTable = () => {
   const ITEMS_PER_PAGE = 30
-  const dispatch = useDispatch()
 
   // REDUX
+  const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.categories.list)
 
   const handleCreateCategory = (product) => {

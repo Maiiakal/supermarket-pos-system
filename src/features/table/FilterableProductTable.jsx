@@ -1,5 +1,5 @@
 import '../../assets/styles/Table.css'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
 import { Button, Modal } from 'react-bootstrap'
@@ -22,7 +22,12 @@ import {
 
 const FilterableProductTable = () => {
   const ITEMS_PER_PAGE = 30
+
+  // REDUX
   const dispatch = useDispatch()
+  const productList = useSelector((state) => state.products.list)
+  const categoryList = useSelector((state) => state.categories.list)
+
 
   const handleCreateProduct = (product) => {
     dispatch(createProduct(product))
@@ -35,10 +40,6 @@ const FilterableProductTable = () => {
   const handleDeleteProduct = (product) => {
     dispatch(deleteProduct(product))
   }
-
-  // REDUX
-  const productList = useSelector((state) => state.products.list)
-  const categoryList = useSelector((state) => state.categories.list)
 
   // paginations states
   const [search, setSearch] = useState('')

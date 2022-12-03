@@ -5,7 +5,7 @@ export const ProductsGenerator = (quantity) => {
       code: i,
       name: `Lettuce ${i}`,
       price: i + 10,
-      category: "food",
+      category: "Food",
       imageURL:
         "https://images.eatthismuch.com/img/90334_Shamarie84_1494cd7c-dd59-487a-9e0b-719d0277359f.jpeg",
       quantity: 1

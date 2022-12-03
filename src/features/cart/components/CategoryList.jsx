@@ -1,14 +1,23 @@
-import { useSelector } from 'react-redux'
-import Button from 'react-bootstrap/Button'
+import { useSelector, useDispatch } from 'react-redux'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faBorderAll, faTags } from '@fortawesome/free-solid-svg-icons'
+import { updateSelectedCategory } from '../../../stores/ducks/categories'
 
 //<FontAwesomeIcon icon="fa-sharp fa-solid fa-tags" />
 
 export function CategoryList() {
+  // REDUX
+  const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.categories.list)
+  const selectedCategory = useSelector(
+    (state) => state.categories.selectedCategory,
+  )
+
+  const handleUpdateselectedCategory = (category) => {
+    dispatch(updateSelectedCategory(category))
+  }
 
   return (
     <div className="mb-5 ms-4">
@@ -19,12 +28,14 @@ export function CategoryList() {
       <div className="cartList-view">
         <ToggleButtonGroup type="radio" name="categories" defaultValue={-1}>
           <ToggleButton
-            id='cartegory-all'
+            id="cartegory-all"
             className="me-2 ms-1 mb-3 rounded-2"
             variant="outline-dark"
             value={-1}
             onClick={(e) => {
               // show all list
+
+              handleUpdateselectedCategory(e.currentTarget.textContent)
             }}
           >
             <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
@@ -32,11 +43,15 @@ export function CategoryList() {
           {categoryList.map((category) => (
             <ToggleButton
               id={`category-${category.id}`}
+              name={category.name}
               className="me-2 ms-1 mb-3 rounded-2"
               variant="outline-secondary"
               value={category.id}
+              onClick={(e) => {
+                handleUpdateselectedCategory(e.currentTarget.textContent)
+              }}
             >
-              {category.name} {' (' + categoryList.length + ')'}
+              {category.name}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
