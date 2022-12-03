@@ -29,10 +29,8 @@ export function CartList() {
         </ToggleButtonGroup>
 
         <Button
-          id="-1"
           className="me-2 ms-1 mb-3 rounded-2"
           variant="outline-dark"
-          value="-1"
           onClick={(e) => {
             // add new cart to list
           }}

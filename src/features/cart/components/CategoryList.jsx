@@ -12,26 +12,28 @@ export function CategoryList() {
 
   return (
     <div className="mb-5 ms-4">
-      <h2 className="mb-3"><FontAwesomeIcon icon={faTags} size="lg" /> Categories {'(' + categoryList.length + ')'}
-       </h2>
+      <h2 className="mb-3">
+        <FontAwesomeIcon icon={faTags} size="lg" /> Categories{' '}
+        {'(' + categoryList.length + ')'}
+      </h2>
       <div className="cartList-view">
-        <Button
-          id="-1"
-          className="me-2 ms-1 mb-3 rounded-2"
-          variant="outline-dark"
-          value="-1"
-          onClick={(e) => {
-            // add new cart to list
-          }}
-        >
-         <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
-        </Button>
-        <ToggleButtonGroup type="radio" name="categories" defaultValue={0}>
+        <ToggleButtonGroup type="radio" name="categories" defaultValue={-1}>
+          <ToggleButton
+            id="-1"
+            className="me-2 ms-1 mb-3 rounded-2"
+            variant="outline-dark"
+            value="-1"
+            onClick={(e) => {
+              // show all list
+            }}
+          >
+            <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
+          </ToggleButton>
           {categoryList.map((category) => (
             <ToggleButton
               id={category.id}
               className="me-2 ms-1 mb-3 rounded-2"
-              variant="outline-primary"
+              variant="outline-secondary"
               value={category.id}
             >
               {category.name} {' (' + categoryList.length + ')'}
@@ -42,4 +44,3 @@ export function CategoryList() {
     </div>
   )
 }
-
