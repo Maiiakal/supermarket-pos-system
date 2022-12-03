@@ -38,6 +38,7 @@ const FilterableProductTable = () => {
 
   // REDUX
   const productList = useSelector((state) => state.products.list)
+  const categoryList = useSelector((state) => state.categories.list)
 
   // paginations states
   const [search, setSearch] = useState('')
@@ -263,9 +264,10 @@ const FilterableProductTable = () => {
                 onChange={handleInputChange}
                 value={currentSelection.category}
               >
-                <option value="Food">Food</option>
-                <option value="Beveragres">Beveragres</option>
-                <option value="Snacks">Snacks</option>
+
+                {categoryList.map((category) => ( 
+                  <option value={category.name}>{category.name}</option>
+                ))}
               </Form.Select>
             </FloatingLabel>
 
@@ -386,9 +388,9 @@ const FilterableProductTable = () => {
                 onChange={handleInputChange}
                 value={currentSelection.category}
               >
-                <option value="Food">Food</option>
-                <option value="Beveragres">Beveragres</option>
-                <option value="Snacks">Snacks</option>
+                {categoryList.map((category) => ( 
+                  <option value={category.name}>{category.name}</option>
+                ))}
               </Form.Select>
             </FloatingLabel>
 
