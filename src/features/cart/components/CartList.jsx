@@ -10,7 +10,7 @@ const cart = OrderGenerator(1)
 
 export function CartList() {
   return (
-    <div className="mb-5 ms-4">
+    <div className="mt-2 mb-5 ms-4">
       <h2 className="mb-3"><FontAwesomeIcon icon={faCartShopping} size="lg" /> Carts {'(' + cart.length + ') '}
         
       </h2>
@@ -18,10 +18,10 @@ export function CartList() {
         <ToggleButtonGroup type="radio" name="carts" defaultValue={0}>
           {cart.map((cart) => (
             <ToggleButton
-              id={10}
+              id={`cart-${cart.id}`}
               className="me-2 ms-1 mb-3 rounded-2"
               variant="outline-primary"
-              value={10}
+              value={cart.id}
             >
               {'Cart ' + cart.id} {' (' + cart.items.length + ')'}
             </ToggleButton>

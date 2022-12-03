@@ -19,10 +19,10 @@ export function CategoryList() {
       <div className="cartList-view">
         <ToggleButtonGroup type="radio" name="categories" defaultValue={-1}>
           <ToggleButton
-            id="-1"
+            id='cartegory-all'
             className="me-2 ms-1 mb-3 rounded-2"
             variant="outline-dark"
-            value="-1"
+            value={-1}
             onClick={(e) => {
               // show all list
             }}
@@ -31,7 +31,7 @@ export function CategoryList() {
           </ToggleButton>
           {categoryList.map((category) => (
             <ToggleButton
-              id={category.id}
+              id={`category-${category.id}`}
               className="me-2 ms-1 mb-3 rounded-2"
               variant="outline-secondary"
               value={category.id}
