@@ -107,6 +107,7 @@ const FilterableCategoryTable = () => {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Date Added</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -114,6 +115,7 @@ const FilterableCategoryTable = () => {
           {filtered.map((category) => (
             <tr key={category.id}>
               <td>{category.name}</td>
+              <td>{category.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}</td>
               <td>
                 <Button
                   className="button"
@@ -231,6 +233,7 @@ const FilterableCategoryTable = () => {
                 handleCreateCategory({
                   name: currentSelection.name,
                   imageURL: currentSelection.imageURL,
+                  createdAt: new Date(),
                   id: categoryList[categoryList.length - 1].id + 1,
                 })
               }}
