@@ -1,15 +1,14 @@
 import Card from '../../../components/Card/Card'
-import { Row, Col, ToggleButton, ButtonGroup } from 'react-bootstrap'
+import { Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import Search from '../../table/Search'
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import './Cart.css'
 
 export function ProductList() {
   // REDUX
-  const dispatch = useDispatch()
   const productList = useSelector((state) => state.products.list)
   const selectedCategory = useSelector(
     (state) => state.categories.selectedCategory,
@@ -19,6 +18,17 @@ export function ProductList() {
 
   // use State
   const [search, setSearch] = useState('')
+  //const [indexes, setIndexes] = useState(0)
+
+  const indexes = useMemo(() => {
+    return currentCart.items
+      .map((product, index) => {
+        if (currentCart.items.some((el) => el.code === product.code)) {
+          return index
+        }
+      })
+      .filter((element) => element >= 0)
+  }, [selectedCategory, currentCart, search])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
@@ -37,7 +47,7 @@ export function ProductList() {
     }
 
     return filteredResult
-  }, [selectedCategory, productList, search])
+  }, [selectedCategory, currentCart, productList, search])
 
   return (
     <div className="mb-5">
@@ -54,30 +64,28 @@ export function ProductList() {
         </Col>
       </Row>
 
-        {filtered.map((product) => (
-          <ButtonGroup
+      {filtered.map((product) => (
+        <ToggleButtonGroup
+          type="checkbox"
+          name="products"
+          defaultValue={indexes}
+        >
+          <ToggleButton
+            id={`product-${product.code}`}
             type="checkbox"
-            name="products"
+            variant="outline-secondary"
+            className="ms-3 mb-3 rounded-3"
+            value={product.code}
+            onClick={(e) => {
+              // add to current cart
+              
+              console.log()
+            }}
           >
-            <ToggleButton
-              id={`product-${product.code}`}
-              type="checkbox"
-              variant="outline-secondary"
-              className="ms-3 mb-3 rounded-3"
-              value={product.code}
-              checked={currentCart.items.some(el => el.code === product.code)}
-              onClick={(e) => {
-                // add to current cart
-                console.log()
-              }}
-            >
-              <Card
-                key={product.code}
-                props={product}
-              />
-            </ToggleButton>
-          </ButtonGroup>
-        ))}
+            <Card key={product.code} props={product} />
+          </ToggleButton>
+        </ToggleButtonGroup>
+      ))}
     </div>
   )
 }

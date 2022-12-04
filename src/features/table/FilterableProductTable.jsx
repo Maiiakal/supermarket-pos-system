@@ -390,6 +390,8 @@ const FilterableProductTable = () => {
                 {categoryList.map((category) => ( 
                   <option value={category.name}>{category.name}</option>
                 ))}
+
+                { console.log(currentSelection.category)}
               </Form.Select>
             </FloatingLabel>
 

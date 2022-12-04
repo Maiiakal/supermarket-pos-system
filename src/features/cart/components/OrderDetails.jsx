@@ -43,7 +43,7 @@ function ProductTable({ currentCart }) {
     setTotal(
       subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
     )
-  }, [discount, tax])
+  }, [currentCart, discount, tax])
 
   return (
     <>
