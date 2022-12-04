@@ -1,5 +1,5 @@
 import Card from '../../../components/Card/Card'
-import { Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import { Row, Col, ToggleButton, ButtonGroup } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useMemo } from 'react'
 
@@ -55,27 +55,28 @@ export function ProductList() {
       </Row>
 
         {filtered.map((product) => (
-          <ToggleButtonGroup
+          <ButtonGroup
             type="checkbox"
             name="products"
-            defaultValue={0}
           >
             <ToggleButton
               id={`product-${product.code}`}
+              type="checkbox"
               variant="outline-secondary"
               className="ms-3 mb-3 rounded-3"
               value={product.code}
+              checked={currentCart.items.some(el => el.code === product.code)}
               onClick={(e) => {
-                console.log(product.code)
+                // add to current cart
+                console.log()
               }}
             >
               <Card
                 key={product.code}
                 props={product}
-                onClick={() => console.log(product)}
               />
             </ToggleButton>
-          </ToggleButtonGroup>
+          </ButtonGroup>
         ))}
     </div>
   )

@@ -79,7 +79,7 @@ const FilterableProductTable = () => {
         code: '',
         name: '',
         price: '',
-        category: '',
+        category: categoryList[0].name,
       })
     } else if (e.target.name === 'view') {
       setView(true)
@@ -263,9 +263,7 @@ const FilterableProductTable = () => {
                 name="category"
                 aria-label="Please select a category"
                 onChange={handleInputChange}
-                value={currentSelection.category}
               >
-
                 {categoryList.map((category) => ( 
                   <option value={category.name}>{category.name}</option>
                 ))}
@@ -386,8 +384,8 @@ const FilterableProductTable = () => {
                 id="category"
                 name="category"
                 aria-label="Please select a category"
-                onChange={handleInputChange}
                 value={currentSelection.category}
+                onChange={handleInputChange}
               >
                 {categoryList.map((category) => ( 
                   <option value={category.name}>{category.name}</option>

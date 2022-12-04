@@ -14,6 +14,8 @@ import {
 import './OrderDetails.css'
 
 function OrderDetail() {
+
+  //REDUX
   const currentCart = useSelector((state) => state.carts.selectedCart)
 
   return (
