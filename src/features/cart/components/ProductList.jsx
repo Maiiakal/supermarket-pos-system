@@ -1,9 +1,14 @@
 import Card from '../../../components/Card/Card'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useMemo } from 'react'
 
+import ToggleButton from 'react-bootstrap/ToggleButton'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
 import { useSelector, useDispatch } from 'react-redux'
+
+import './Cart.css'
 
 export function ProductList() {
   // REDUX
@@ -13,13 +18,14 @@ export function ProductList() {
     (state) => state.categories.selectedCategory,
   )
 
+  const currentCart = useSelector((state) => state.carts.selectedCart)
+
   // use State
-  const [list, setList] = useState(productList)
   const [search, setSearch] = useState('')
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
-    let filteredResult = list
+    let filteredResult = productList
 
     if (!selectedCategory.includes('All Categories')) {
       filteredResult = filteredResult.filter(
@@ -50,15 +56,21 @@ export function ProductList() {
           />
         </Col>
       </Row>
-      <Layout>
-        {filtered.map((product) => (
-          <Card key={product.code} props={product} />
-        ))}
-      </Layout>
+        <ToggleButtonGroup className="cartList-view" type="checkbox" name="products" defaultValue={0}>
+          {filtered.map((product) => (
+            <ToggleButton
+              id={`product-${product.code}`}
+              variant="outline-primary"
+              className="me-2 ms-1 mb-3 rounded-2"
+              value={product.code}
+              onClick={(e) => {
+                console.log(product.code)
+              }}
+            >
+              <Card key={product.code} props={product} />
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
     </div>
   )
-}
-
-function Layout({ children }) {
-  return <Row className="ms-4">{children}</Row>
 }

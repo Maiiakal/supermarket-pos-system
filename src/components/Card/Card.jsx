@@ -11,7 +11,7 @@ export function Card ({ props }) {
         <ReactCard.Title className="title fs-5 text-muted fw-light">
           {props.name}
         </ReactCard.Title>
-        <ReactCard.Text className="text fs-3 fw-bold">${props.price}</ReactCard.Text>
+        <ReactCard.Text className="text fs-3 text-dark fw-bold">${props.price}</ReactCard.Text>
       </ReactCard.Body>
     </ReactCard>
   )
