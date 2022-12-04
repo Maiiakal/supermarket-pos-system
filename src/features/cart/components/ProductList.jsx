@@ -17,21 +17,20 @@ export function ProductList() {
 
   // use State
   const [search, setSearch] = useState('')
-  const [indices, setIndices] = useState(0)
 
-  // const indexes = useMemo(() => {
-  // return currentCart.items
-  //   .map((product, index) => {
-  //     if (currentCart.items.some((el) => el.code === product.code)) {
-  //       return index
-  //     }
-  //   })
-  //   .filter((element) => element >= 0)
-  // }, [selectedCategory, currentCart, search])
+  const indexes = useMemo(() => {
+  return currentCart.items
+    .map((product, index) => {
+      if (currentCart.items.some((el) => el.code === product.code)) {
+        return index
+      }
+    })
+    .filter((element) => element >= 0)
+  }, [currentCategory, currentCart, search])
 
   useEffect(() => {
     //console.log(indices)
-  }, [currentCart, currentCategory, indices])
+  }, [currentCart, currentCategory])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
@@ -75,7 +74,7 @@ export function ProductList() {
         <ToggleButtonGroup
           type="checkbox"
           name="products"
-          defaultValue={indices}
+          defaultValue={indexes}
         >
           <ToggleButton
             id={`product-${product.code}`}
@@ -85,7 +84,7 @@ export function ProductList() {
             value={product.code}
             onClick={(e) => {
               // add to current cart
-            setIndices(1)
+              
               //console.log()
             }}
           >
