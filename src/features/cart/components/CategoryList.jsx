@@ -12,7 +12,7 @@ export function CategoryList() {
   const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.categories.list)
 
-  const handleUpdateselectedCategory = (category) => {
+  const handleUpdateSelectedCategory = (category) => {
     dispatch(updateSelectedCategory(category))
   }
 
@@ -32,7 +32,7 @@ export function CategoryList() {
             onClick={(e) => {
               // show all list
 
-              handleUpdateselectedCategory(e.currentTarget.textContent)
+              handleUpdateSelectedCategory(e.currentTarget.textContent)
             }}
           >
             <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
@@ -45,7 +45,7 @@ export function CategoryList() {
               variant="outline-secondary"
               value={category.id}
               onClick={(e) => {
-                handleUpdateselectedCategory(e.currentTarget.textContent)
+                handleUpdateSelectedCategory(e.currentTarget.textContent)
               }}
             >
               {category.name}

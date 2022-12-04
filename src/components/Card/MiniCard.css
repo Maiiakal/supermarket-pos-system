@@ -1,0 +1,27 @@
+.cardSize {
+    width: 6em;
+    height: 6em;
+    border-radius: 0;
+    background-color: white;
+
+    margin: 1em;
+    margin-right: 0.2em;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    margin-bottom: 12px;
+}
+
+.titleSize {
+    margin-bottom: 7px;
+    font-size: 12px;
+}   
+
+.textSize {
+    font-size: 15px;
+}

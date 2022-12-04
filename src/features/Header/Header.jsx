@@ -15,6 +15,12 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink
+              to="/shopping-cart"
+              className={({ isActive }) => (isActive ? 'link-active' : '')}
+            >
+              Cart
+            </NavLink>
+            <NavLink
               to="/product-table"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >
@@ -25,12 +31,6 @@ const NavBar = () => {
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >
               Categories
-            </NavLink>
-            <NavLink
-              to="/shopping-cart"
-              className={({ isActive }) => (isActive ? 'link-active' : '')}
-            >
-              Cart
             </NavLink>
           </Nav>
         </Navbar.Collapse>

@@ -1,5 +1,5 @@
 import '../../assets/styles/Table.css'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import ReactPagination from './Pagination'
 import Search from './Search'
 

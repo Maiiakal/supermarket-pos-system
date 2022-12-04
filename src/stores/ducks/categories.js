@@ -27,7 +27,7 @@ export const updateSelectedCategory = (categoryName) => ({
 });
 
 const initialState = {
-  list: CategoryGenerator(10),
+  list: CategoryGenerator(2),
   selectedCategory: "All Categories",
 };
 
@@ -36,9 +36,6 @@ export default (state = initialState, action) => {
     case CREATE_CATEGORY:
       return {
         ...state,
-        list: state.list.filter(
-          (category) => action.category.id !== category.id
-        ),
         list: [...state.list, { ...action.category }],
       };
     case UPDATE_CATEGORY:

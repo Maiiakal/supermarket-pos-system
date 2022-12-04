@@ -1,43 +1,47 @@
 import { List } from './List'
 import { useEffect, useState } from 'react'
-import { ProductsGenerator } from '../../Data'
+import { useSelector, useDispatch } from 'react-redux'
 import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
+import {
+  deleteCart,
+  updateSelectedCart,
+} from '../../../stores/ducks/carts'
+
+
 import './OrderDetails.css'
 
 function OrderDetail() {
-  const [list, setList] = useState(ProductsGenerator(30))
+  const currentCart = useSelector((state) => state.carts.selectedCart)
 
   return (
     <div className="border-start vh-100 p-4 pt-0">
       <h2 className="mb-3">Order Details</h2>
-      <ProductTable list={list} setList={setList} />
+      <ProductTable currentCart={currentCart} />
     </div>
   )
 }
 
-function ProductTable({ list, setList }) {
-  const [subtotal, setSubtotal] = useState(calcSubTotal(list))
+function ProductTable({ currentCart }) {
+  const [subtotal, setSubtotal] = useState(calcSubTotal(currentCart.items))
   const [discount, setDiscount] = useState(0)
   const [tax, setTax] = useState(0)
-  const [total, setTotal] = useState(calcSubTotal(list))
+  const [total, setTotal] = useState(calcSubTotal(currentCart.items))
 
   useEffect(() => {
-    setSubtotal(calcSubTotal(list))
+    setSubtotal(calcSubTotal(currentCart.items))
     setTotal(
-        subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
-      )
-  }, [list, subtotal])
+      subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
+    )
+  }, [currentCart, subtotal])
 
-  useEffect(
-    () => {
-      setTotal(
-        subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
-      )
-      
-    }, [discount, tax])
+  useEffect(() => {
+    setTotal(
+      subtotal + ([subtotal * (tax / 100)] - [(discount / 100) * subtotal]),
+    )
+  }, [discount, tax])
 
   return (
     <>
@@ -53,7 +57,7 @@ function ProductTable({ list, setList }) {
             </tr>
           </thead>
           <tbody>
-            {list.map((product) => (
+            {currentCart.items.map((product) => (
               <tr key={product.code}>
                 <td>{product.name}</td>
                 <td>{'$' + product.price}</td>
@@ -63,12 +67,12 @@ function ProductTable({ list, setList }) {
                     className="form-control quantity-box"
                     value={product.quantity}
                     onChange={(e) => {
-                      list.map((p) => {
+                      currentCart.items.map((p) => {
                         if (p.code === product.code) {
                           p.quantity = e.target.value
                         }
                       })
-                      setSubtotal(calcSubTotal(list))
+                      setSubtotal(calcSubTotal(currentCart.items))
                     }}
                   />
                 </td>
@@ -79,7 +83,7 @@ function ProductTable({ list, setList }) {
                     variant="danger"
                     name="delete"
                     onClick={(e) => {
-                      setList(list.filter((p) => product.code !== p.code))
+                      //setList(list.filter((p) => product.code !== p.code))
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} size="lg" />
@@ -90,7 +94,9 @@ function ProductTable({ list, setList }) {
           </tbody>
         </Table>
       </div>
-      <p className="fs-5 fw-bold m-4 text-center">Total items: {list.length}</p>
+      <p className="fs-5 fw-bold m-4 text-center">
+        Total items: {currentCart.items.length}
+      </p>
 
       <div className="summary-container">
         <hr></hr>
