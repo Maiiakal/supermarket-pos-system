@@ -11,6 +11,7 @@ import {
   faEye,
   faPenToSquare,
   faTrash,
+  faStore,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,7 +28,6 @@ const FilterableProductTable = () => {
   const dispatch = useDispatch()
   const productList = useSelector((state) => state.products.list)
   const categoryList = useSelector((state) => state.categories.list)
-
 
   const handleCreateProduct = (product) => {
     dispatch(createProduct(product))
@@ -167,7 +167,10 @@ const FilterableProductTable = () => {
 
   return (
     <div>
-      <h1 className="table-heading">Product Table</h1>
+      <h1 className="table-heading">
+        {' '}
+        <FontAwesomeIcon icon={faStore} size="lg" /> Product Table
+      </h1>
 
       <Search
         onSearch={(value) => {
@@ -264,7 +267,7 @@ const FilterableProductTable = () => {
                 aria-label="Please select a category"
                 onChange={handleInputChange}
               >
-                {categoryList.map((category) => ( 
+                {categoryList.map((category) => (
                   <option value={category.name}>{category.name}</option>
                 ))}
               </Form.Select>
@@ -387,11 +390,11 @@ const FilterableProductTable = () => {
                 value={currentSelection.category}
                 onChange={handleInputChange}
               >
-                {categoryList.map((category) => ( 
+                {categoryList.map((category) => (
                   <option value={category.name}>{category.name}</option>
                 ))}
 
-                { console.log(currentSelection.category)}
+                {console.log(currentSelection.category)}
               </Form.Select>
             </FloatingLabel>
 

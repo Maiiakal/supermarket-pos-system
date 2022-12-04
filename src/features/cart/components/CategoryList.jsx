@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlobe, faBorderAll, faTags } from '@fortawesome/free-solid-svg-icons'
+import { faGlobe, faTags } from '@fortawesome/free-solid-svg-icons'
 import { updateSelectedCategory } from '../../../stores/ducks/categories'
 
 //<FontAwesomeIcon icon="fa-sharp fa-solid fa-tags" />

@@ -2,6 +2,8 @@ import Card from '../../../components/Card/Card'
 import { Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useEffect, useMemo } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStore } from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector } from 'react-redux'
 
@@ -53,7 +55,11 @@ export function ProductList() {
     <div className="mb-5">
       <Row className="mb-3 ms-2">
         <Col>
-          <h2 className="mb-3">Products {'(' + filtered.length + ')'}</h2>
+          <h2 className="mb-3">
+            {' '}
+            <FontAwesomeIcon icon={faStore} size="lg" /> Products{' '}
+            {'(' + filtered.length + ')'}
+          </h2>
         </Col>
         <Col className="me-5 d-flex align-items-end flex-column">
           <Search
@@ -78,7 +84,7 @@ export function ProductList() {
             value={product.code}
             onClick={(e) => {
               // add to current cart
-              
+
               console.log()
             }}
           >

@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStore, faTags, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 const NavBar = () => {
   return (
@@ -18,19 +20,19 @@ const NavBar = () => {
               to="/shopping-cart"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >
-              Cart
+              <FontAwesomeIcon icon={faCartShopping} size="lg" /> Cart{' '}
             </NavLink>
             <NavLink
               to="/product-table"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
             >
-              Products
+              <FontAwesomeIcon icon={faStore} size="lg" /> Products{' '}
             </NavLink>
             <NavLink
               to="/category-table"
               className={({ isActive }) => (isActive ? 'link-active' : '')}
-            >
-              Categories
+            >  <FontAwesomeIcon icon={faTags} size="lg" /> Categories{' '}
+              
             </NavLink>
           </Nav>
         </Navbar.Collapse>

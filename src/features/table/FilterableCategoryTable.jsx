@@ -8,6 +8,9 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTags } from '@fortawesome/free-solid-svg-icons'
+
 import { useSelector, useDispatch } from 'react-redux'
 import {
   createCategory,
@@ -146,7 +149,10 @@ const FilterableCategoryTable = () => {
 
   return (
     <div>
-      <h1 className="table-heading">Category Table</h1>
+      <h1 className="table-heading">
+        {' '}
+        <FontAwesomeIcon icon={faTags} size="lg" /> Category Table
+      </h1>
 
       <Search
         onSearch={(value) => {
@@ -223,10 +229,10 @@ const FilterableCategoryTable = () => {
               onClick={(e) => {
                 setAdd(false)
                 handleCreateCategory({
-                    name: currentSelection.name,
-                    imageURL: currentSelection.imageURL,
-                    id: categoryList[categoryList.length - 1].id + 1,
-                  })
+                  name: currentSelection.name,
+                  imageURL: currentSelection.imageURL,
+                  id: categoryList[categoryList.length - 1].id + 1,
+                })
               }}
             >
               Add
