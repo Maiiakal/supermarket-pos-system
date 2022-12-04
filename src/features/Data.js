@@ -20,6 +20,7 @@ export const CategoryGenerator = (quantity) => {
     categories.push({
       id: i,
       name: `Category ${i}`,
+      createdAt: new Date(),
       imageURL:
         "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=pexels-ella-olsson-1640777.jpg&fm=jpg",
     });
