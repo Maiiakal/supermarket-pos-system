@@ -12,8 +12,8 @@ import './Cart.css'
 export function ProductList() {
   // REDUX
   const productList = useSelector((state) => state.products.list)
-  const selectedCategory = useSelector((state) => state.categories.selectedCategory)
-  const currentCart = useSelector((state) => state.carts.selectedCart)
+  const currentCategory = useSelector((state) => state.categories.currentCategory)
+  const currentCart = useSelector((state) => state.carts.currentCart)
 
   // use State
   const [search, setSearch] = useState('')
@@ -30,17 +30,17 @@ export function ProductList() {
   // }, [selectedCategory, currentCart, search])
 
   useEffect(() => {
-    console.log(indices)
-  }, [currentCart, selectedCategory, indices])
+    //console.log(indices)
+  }, [currentCart, currentCategory, indices])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
     let filteredResult = productList
 
-    if (!selectedCategory.includes('All Categories')) {
+    if (!(currentCategory.name === 'All Categories')) {
       filteredResult = filteredResult.filter(
         (result) =>
-          selectedCategory === result.category &&
+          currentCategory.name === result.category &&
           result.name.toLowerCase().includes(search.toLowerCase()),
       )
     } else {
@@ -50,7 +50,7 @@ export function ProductList() {
     }
 
     return filteredResult
-  }, [selectedCategory, currentCart, productList, search])
+  }, [currentCategory, currentCart, productList, search])
 
   return (
     <div className="mb-5">

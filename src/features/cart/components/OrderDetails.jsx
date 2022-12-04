@@ -16,7 +16,7 @@ import './OrderDetails.css'
 function OrderDetail() {
 
   //REDUX
-  const currentCart = useSelector((state) => state.carts.selectedCart)
+  const currentCart = useSelector((state) => state.carts.currentCart)
 
   return (
     <div className="border-start vh-100 p-4 pt-0">

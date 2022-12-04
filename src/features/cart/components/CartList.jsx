@@ -14,9 +14,10 @@ import {
 } from '../../../stores/ducks/carts'
 
 export function CartList() {
-  //REDUZ
+  //REDUX
   const dispatch = useDispatch()
   const cartList = useSelector((state) => state.carts.list)
+  const currentCart = useSelector((state) => state.carts.currentCart)
 
   const handleCreateCart = (cart) => {
     dispatch(createCart(cart))
@@ -30,11 +31,13 @@ export function CartList() {
     dispatch(updateSelectedCart(cart))
   }
 
-  useEffect(() => {}, [cartList])
-
-  useEffect(() => {
-     handleUpdateSelectedCart(cartList[0])
-  }, [])
+  const currentIndex = cartList
+    .map((cart, index) => {
+      if (cart.id === currentCart.id) {
+        return index
+      }
+    })
+    .filter((element) => element >= 0)
 
   return (
     <div className="mt-2 mb-5 ms-4">
@@ -43,7 +46,11 @@ export function CartList() {
         {'(' + cartList.length + ') '}
       </h2>
       <div className="cartList-view">
-        <ToggleButtonGroup type="radio" name="carts" defaultValue={0}>
+        <ToggleButtonGroup
+          type="radio"
+          name="carts"
+          defaultValue={currentIndex}
+        >
           {cartList.map((cart) => (
             <ToggleButton
               id={`cart-${cart.id}`}
@@ -51,7 +58,6 @@ export function CartList() {
               variant="outline-primary"
               value={cart.id}
               onClick={(e) => {
-                console.log(cart.id)
                 handleUpdateSelectedCart(cart)
               }}
             >

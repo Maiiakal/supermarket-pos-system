@@ -21,14 +21,17 @@ export const deleteCategory = (category) => ({
   category,
 });
 
-export const updateSelectedCategory = (categoryName) => ({
+export const updateSelectedCategory = (category) => ({
   type: UPDATE_SELECTED_CATEGORY,
-  payload: categoryName,
+  category,
 });
 
 const initialState = {
   list: CategoryGenerator(2),
-  selectedCategory: "All Categories",
+  currentCategory: {
+    name: "All Categories",
+    id: -1,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -56,7 +59,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        selectedCategory: action.payload,
+        currentCategory: action.category,
       };
     default:
       return state;

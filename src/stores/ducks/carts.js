@@ -28,7 +28,7 @@ export const updateSelectedCart = (cart) => ({
 
 const initialState = {
   list: CartGenerator(2),
-  selectedCart: {
+  currentCart: {
     id: 0,
     items: [],
   },
@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
     case UPDATE_SELECTED_CART:
       return {
         ...state,
-        selectedCart: action.cart,
+        currentCart: action.cart,
       };
     default:
       return state;

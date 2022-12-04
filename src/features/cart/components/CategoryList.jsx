@@ -32,7 +32,10 @@ export function CategoryList() {
             onClick={(e) => {
               // show all list
 
-              handleUpdateSelectedCategory(e.currentTarget.textContent)
+              handleUpdateSelectedCategory({
+                name: "All Categories",
+                id: -1,
+              })
             }}
           >
             <FontAwesomeIcon icon={faGlobe} size="lg" /> All Categories
@@ -45,7 +48,7 @@ export function CategoryList() {
               variant="outline-secondary"
               value={category.id}
               onClick={(e) => {
-                handleUpdateSelectedCategory(e.currentTarget.textContent)
+                handleUpdateSelectedCategory(category)
               }}
             >
               {category.name}
