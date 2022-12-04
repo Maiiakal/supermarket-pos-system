@@ -11,10 +11,21 @@ export function CategoryList() {
   // REDUX
   const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.categories.list)
+  const currentCategory = useSelector(
+    (state) => state.categories.currentCategory,
+  )
 
   const handleUpdateSelectedCategory = (category) => {
     dispatch(updateSelectedCategory(category))
   }
+
+  const currentIndex = categoryList
+    .map((category, index) => {
+      if (category.id === currentCategory.id) {
+        return index
+      }
+    })
+    .filter((element) => element >= 0)
 
   return (
     <div className="mb-5 ms-4">
@@ -23,7 +34,7 @@ export function CategoryList() {
         {'(' + categoryList.length + ')'}
       </h2>
       <div className="cartList-view">
-        <ToggleButtonGroup type="radio" name="categories" defaultValue={-1}>
+        <ToggleButtonGroup type="radio" name="categories" defaultValue={currentIndex}>
           <ToggleButton
             id="cartegory-all"
             className="me-2 ms-1 mb-3 rounded-2"
@@ -33,7 +44,7 @@ export function CategoryList() {
               // show all list
 
               handleUpdateSelectedCategory({
-                name: "All Categories",
+                name: 'All Categories',
                 id: -1,
               })
             }}
