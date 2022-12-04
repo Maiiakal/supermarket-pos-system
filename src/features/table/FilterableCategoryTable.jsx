@@ -197,7 +197,7 @@ const FilterableCategoryTable = () => {
           <Modal.Body>
             <FloatingLabel
               controlId="floatingInput"
-              label="Category Name"
+              label="Please enter category name"
               className="mb-3"
             >
               <Form.Control
@@ -209,21 +209,6 @@ const FilterableCategoryTable = () => {
                 onChange={handleInputChange}
               />
             </FloatingLabel>
-
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Category icon URL"
-              className="mb-3"
-            >
-              <Form.Control
-                req
-                name="imageURL"
-                type="text"
-                placeholder="www.images.com"
-                value={currentSelection.imageURL}
-                onChange={handleInputChange}
-              />
-            </FloatingLabel>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -232,7 +217,6 @@ const FilterableCategoryTable = () => {
                 setAdd(false)
                 handleCreateCategory({
                   name: currentSelection.name,
-                  imageURL: currentSelection.imageURL,
                   createdAt: new Date(),
                   id: categoryList[categoryList.length - 1].id + 1,
                 })
