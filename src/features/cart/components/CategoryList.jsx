@@ -34,15 +34,13 @@ export function CategoryList() {
         {'(' + categoryList.length + ')'}
       </h2>
       <div className="cartList-view">
-        <ToggleButtonGroup type="radio" name="categories" defaultValue={currentIndex}>
+        <ToggleButtonGroup type="radio" name="categories" defaultValue={(currentIndex.length)?currentIndex:-1}>
           <ToggleButton
             id="cartegory-all"
             className="me-2 ms-1 mb-3 rounded-2"
             variant="outline-dark"
             value={-1}
             onClick={(e) => {
-              // show all list
-
               handleUpdateSelectedCategory({
                 name: 'All Categories',
                 id: -1,
