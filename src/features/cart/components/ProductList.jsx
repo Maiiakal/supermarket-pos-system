@@ -12,25 +12,26 @@ import './Cart.css'
 export function ProductList() {
   // REDUX
   const productList = useSelector((state) => state.products.list)
-  const selectedCategory = useSelector(
-    (state) => state.categories.selectedCategory,
-  )
-
+  const selectedCategory = useSelector((state) => state.categories.selectedCategory)
   const currentCart = useSelector((state) => state.carts.selectedCart)
 
   // use State
   const [search, setSearch] = useState('')
-  //const [indexes, setIndexes] = useState(0)
+  const [indices, setIndices] = useState(0)
 
-  const indexes = useMemo(() => {
-    return currentCart.items
-      .map((product, index) => {
-        if (currentCart.items.some((el) => el.code === product.code)) {
-          return index
-        }
-      })
-      .filter((element) => element >= 0)
-  }, [selectedCategory, currentCart, search])
+  // const indexes = useMemo(() => {
+  // return currentCart.items
+  //   .map((product, index) => {
+  //     if (currentCart.items.some((el) => el.code === product.code)) {
+  //       return index
+  //     }
+  //   })
+  //   .filter((element) => element >= 0)
+  // }, [selectedCategory, currentCart, search])
+
+  useEffect(() => {
+    console.log(indices)
+  }, [currentCart, selectedCategory, indices])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
@@ -74,7 +75,7 @@ export function ProductList() {
         <ToggleButtonGroup
           type="checkbox"
           name="products"
-          defaultValue={indexes}
+          defaultValue={indices}
         >
           <ToggleButton
             id={`product-${product.code}`}
@@ -84,8 +85,8 @@ export function ProductList() {
             value={product.code}
             onClick={(e) => {
               // add to current cart
-
-              console.log()
+            setIndices(1)
+              //console.log()
             }}
           >
             <Card key={product.code} props={product} />
