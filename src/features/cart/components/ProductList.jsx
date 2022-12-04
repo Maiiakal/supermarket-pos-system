@@ -1,10 +1,7 @@
 import Card from '../../../components/Card/Card'
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useMemo } from 'react'
-
-import ToggleButton from 'react-bootstrap/ToggleButton'
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -56,21 +53,30 @@ export function ProductList() {
           />
         </Col>
       </Row>
-        <ToggleButtonGroup className="cartList-view" type="checkbox" name="products" defaultValue={0}>
-          {filtered.map((product) => (
+
+        {filtered.map((product) => (
+          <ToggleButtonGroup
+            type="checkbox"
+            name="products"
+            defaultValue={0}
+          >
             <ToggleButton
               id={`product-${product.code}`}
-              variant="outline-primary"
-              className="me-2 ms-1 mb-3 rounded-2"
+              variant="outline-secondary"
+              className="ms-3 mb-3 rounded-3"
               value={product.code}
               onClick={(e) => {
                 console.log(product.code)
               }}
             >
-              <Card key={product.code} props={product} />
+              <Card
+                key={product.code}
+                props={product}
+                onClick={() => console.log(product)}
+              />
             </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
+          </ToggleButtonGroup>
+        ))}
     </div>
   )
 }
