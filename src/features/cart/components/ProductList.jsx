@@ -39,8 +39,7 @@ export function ProductList() {
   }, [currentCategory, currentCart, search])
 
   useEffect(() => {
-    //console.log(currentCart.items)
-    //console.log(indexes)
+
   }, [currentCart, currentCategory])
 
   // returns the currently viewed list with and without search parameters
@@ -82,43 +81,36 @@ export function ProductList() {
       </Row>
 
       {filtered.map((product) => (
-        <ToggleButtonGroup
+        <ToggleButton
+          id={`product-${product.code}`}
           type="checkbox"
-          name="products"
-          defaultValue={indexes}
-        >
-          <ToggleButton
-            id={`product-${product.code}`}
-            type="checkbox"
-            variant="outline-secondary"
-            className="ms-3 mb-3 rounded-3"
-            value={product.code}
-            onClick={(e) => {
-              // add to current cart
-              const exists = currentCart.items.some(
-                (el) => el.code === product.code,
-              )
+          variant="outline-secondary"
+          className="ms-3 mb-3 rounded-3"
+          value={product.code}
+          checked={currentCart.items.some((el) => el.code === product.code)}
+          onClick={(e) => {
+            // add to current cart
+            const exists = currentCart.items.some(
+              (el) => el.code === product.code,
+            )
 
-              if (exists) {
-                handleUpdateSelectedCart({
-                  id: currentCart.id,
-                  items: currentCart.items.filter(
-                    (p) => p.code !== product.code,
-                  ),
-                })
-                handleUpdateCart(currentCart)
-              } else {
-                handleUpdateSelectedCart({
-                  id: currentCart.id,
-                  items: [...currentCart.items, product],
-                })
-                handleUpdateCart(currentCart)
-              }
-            }}
-          >
-            <Card key={product.code} props={product} />
-          </ToggleButton>
-        </ToggleButtonGroup>
+            if (exists) {
+              handleUpdateSelectedCart({
+                id: currentCart.id,
+                items: currentCart.items.filter((p) => p.code !== product.code),
+              })
+              handleUpdateCart(currentCart)
+            } else {
+              handleUpdateSelectedCart({
+                id: currentCart.id,
+                items: [...currentCart.items, product],
+              })
+              handleUpdateCart(currentCart)
+            }
+          }}
+        >
+          <Card key={product.code} props={product} />
+        </ToggleButton>
       ))}
     </div>
   )

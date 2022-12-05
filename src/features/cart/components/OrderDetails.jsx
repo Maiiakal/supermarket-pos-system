@@ -46,7 +46,6 @@ function ProductTable() {
 
   useEffect(() => {
     handleUpdateCart(currentCart)
-    //console.log(currentCart)
   }, [currentCart])
 
   useEffect(() => {
