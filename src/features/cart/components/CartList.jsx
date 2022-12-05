@@ -23,13 +23,16 @@ export function CartList() {
   }
 
   useEffect(() => {
-    handleUpdateSelectedCart(cartList[0])
+    if (currentCart.id === -1) handleUpdateSelectedCart(cartList[0])
   }, [])
 
   const currentIndex = cartList
     .map((cart, index) => {
       if (cart.id === currentCart.id) {
         return index
+      }
+      else {
+        return 0
       }
     })
     .filter((element) => element >= 0)
