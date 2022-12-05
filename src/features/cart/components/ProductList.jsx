@@ -11,7 +11,6 @@ import { updateSelectedCart } from '../../../stores/ducks/carts'
 import './Cart.css'
 
 export function ProductList() {
-
   // REDUX
   const dispatch = useDispatch()
   const productList = useSelector((state) => state.products.list)
@@ -94,14 +93,21 @@ export function ProductList() {
             onClick={(e) => {
               // add to current cart
 
-              console.log(product)
+              const exists = currentCart.items.some((el) => el.code === product.code)
+              
+              console.log(exists)
 
-              handleUpdateSelectedCart({
-                id: currentCart.id,
-                items: [...currentCart.items, product],
-              })
-
-              console.log(currentCart.items)
+              if (exists) {
+                handleUpdateSelectedCart({
+                  id: currentCart.id,
+                  items: currentCart.items.filter((product) => product.code === product.code),
+                })
+              } else {
+                handleUpdateSelectedCart({
+                  id: currentCart.id,
+                  items: [...currentCart.items, product],
+                })
+              }
             }}
           >
             <Card key={product.code} props={product} />
