@@ -5,31 +5,40 @@ import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateSelectedCart } from '../../../stores/ducks/carts'
 
 import './Cart.css'
 
 export function ProductList() {
+
   // REDUX
+  const dispatch = useDispatch()
   const productList = useSelector((state) => state.products.list)
-  const currentCategory = useSelector((state) => state.categories.currentCategory)
+  const currentCategory = useSelector(
+    (state) => state.categories.currentCategory,
+  )
   const currentCart = useSelector((state) => state.carts.currentCart)
+
+  const handleUpdateSelectedCart = (cart) => {
+    dispatch(updateSelectedCart(cart))
+  }
 
   // use State
   const [search, setSearch] = useState('')
 
   const indexes = useMemo(() => {
-  return currentCart.items
-    .map((product, index) => {
-      if (currentCart.items.some((el) => el.code === product.code)) {
-        return index
-      }
-    })
-    .filter((element) => element >= 0)
+    return currentCart.items
+      .map((product, index) => {
+        if (currentCart.items.some((el) => el.code === product.code)) {
+          return index
+        }
+      })
+      .filter((element) => element >= 0)
   }, [currentCategory, currentCart, search])
 
   useEffect(() => {
-    //console.log(indices)
+    //console.log(indexes)
   }, [currentCart, currentCategory])
 
   // returns the currently viewed list with and without search parameters
@@ -84,8 +93,15 @@ export function ProductList() {
             value={product.code}
             onClick={(e) => {
               // add to current cart
-              
-              //console.log()
+
+              console.log(product)
+
+              handleUpdateSelectedCart({
+                id: currentCart.id,
+                items: [...currentCart.items, product],
+              })
+
+              console.log(currentCart.items)
             }}
           >
             <Card key={product.code} props={product} />
