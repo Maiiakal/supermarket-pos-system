@@ -1,10 +1,5 @@
 import Card from '../../../components/Card/Card'
-import {
-  Row,
-  Col,
-  ToggleButton,
-  ButtonGroup,
-} from 'react-bootstrap'
+import { Row, Col, ToggleButton, ButtonGroup } from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -84,7 +79,7 @@ export function ProductList() {
       </Row>
 
       {filtered.map((product) => (
-        <ButtonGroup>
+        <ButtonGroup name="products" type="checkbox">
           <ToggleButton
             id={`product-${product.code}`}
             type="checkbox"
