@@ -5,7 +5,7 @@ import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import { deleteCart } from '../../../stores/ducks/carts'
+import { updateSelectedCart, deleteCart } from '../../../stores/ducks/carts'
 
 import './OrderDetails.css'
 
@@ -13,7 +13,7 @@ function OrderDetail() {
   return (
     <div className="border-start vh-100 p-4 pt-0">
       <h2 className="mb-3">Order Details</h2>
-      <ProductTable/>
+      <ProductTable />
     </div>
   )
 }
@@ -22,7 +22,11 @@ function ProductTable() {
   //REDUX
   const dispatch = useDispatch()
   const currentCart = useSelector((state) => state.carts.currentCart)
-  
+
+  const handleUpdateSelectedCart = (cart) => {
+    dispatch(updateSelectedCart(cart))
+  }
+
   const handleDeleteCart = (cart) => {
     dispatch(deleteCart(cart))
   }
@@ -85,7 +89,12 @@ function ProductTable() {
                     variant="danger"
                     name="delete"
                     onClick={(e) => {
-                      //setList(list.filter((p) => product.code !== p.code))
+                      handleUpdateSelectedCart({
+                        id: currentCart.id,
+                        items: currentCart.items.filter(
+                          (p) => p.code !== product.code,
+                        ),
+                      })
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} size="lg" />
