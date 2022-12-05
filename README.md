@@ -36,10 +36,12 @@ The application contains the following models:
 The application contains the following dependencies:
 
   - React Router DOM `6.4.3`
-  - Bootstrap `2.5.0`
+  - Bootstrap `5.2.2`
   - Formik `2.2.9`
   - Immer `9.0.16`
   - Prettier `2.7.1`
+  - Redux: `4.2.0`
+  - React-redux: `8.0.5`
 
 This project was made using React `18.2.0`.
 
@@ -54,3 +56,5 @@ Several design patterns have been researched and by far this project was mostly 
 - [🧱 Components And Styling](docs/components-and-styling.md)
 - [🗃️ State Management](docs/state-management.md)
 - [🧪 Testing](docs/testing.md)
+- [🚄 Performance](docs/performance.md)
+- [🌐 Deployment](docs/deployment.md)
