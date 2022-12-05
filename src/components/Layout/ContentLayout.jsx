@@ -1,0 +1,1 @@
+// for the content inside main layout

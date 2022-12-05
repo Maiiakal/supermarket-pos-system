@@ -1,0 +1,38 @@
+.table-heading {
+    margin-top: 1em;
+    margin-bottom: 1em;
+text-align: center;
+}
+
+.table-container {
+    text-align: center;
+    max-width: 70%;
+    margin: auto;
+    margin-top: 2em;
+}
+
+.button {
+    margin-right: 2em;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.searchbox {
+    width: 260px;
+    margin-top: 1em;
+    margin-left: 16em;
+}
+
+
+.serachbox-text {
+    margin-top: 1em;
+    margin-left: 16em;
+}
+
+.addBtn {
+    margin-right: 13em;
+}

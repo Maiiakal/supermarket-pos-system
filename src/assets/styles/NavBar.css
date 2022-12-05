@@ -1,0 +1,27 @@
+.container {
+    margin-bottom: 1em;
+}
+
+
+.brand {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+    padding: 1em;
+}
+
+a:hover {
+    text-decoration: none;
+    color: blue;
+    padding: 1em;
+}
+
+.link-active {
+    text-decoration: none;
+    color: blue;
+    padding: 1em;
+    
+}
