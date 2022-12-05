@@ -5,28 +5,28 @@ import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import {
-  deleteCart,
-  updateSelectedCart,
-} from '../../../stores/ducks/carts'
-
+import { deleteCart } from '../../../stores/ducks/carts'
 
 import './OrderDetails.css'
 
 function OrderDetail() {
-
-  //REDUX
-  const currentCart = useSelector((state) => state.carts.currentCart)
-
   return (
     <div className="border-start vh-100 p-4 pt-0">
       <h2 className="mb-3">Order Details</h2>
-      <ProductTable currentCart={currentCart} />
+      <ProductTable/>
     </div>
   )
 }
 
-function ProductTable({ currentCart }) {
+function ProductTable() {
+  //REDUX
+  const dispatch = useDispatch()
+  const currentCart = useSelector((state) => state.carts.currentCart)
+  
+  const handleDeleteCart = (cart) => {
+    dispatch(deleteCart(cart))
+  }
+
   const [subtotal, setSubtotal] = useState(calcSubTotal(currentCart.items))
   const [discount, setDiscount] = useState(0)
   const [tax, setTax] = useState(0)
