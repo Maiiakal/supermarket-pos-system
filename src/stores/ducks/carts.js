@@ -29,7 +29,7 @@ export const updateSelectedCart = (cart) => ({
 const initialState = {
   list: CartGenerator(2),
   currentCart: {
-    id: 0,
+    id: -1,
     items: [],
   },
 };
