@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { updateSelectedCart } from '../../../stores/ducks/carts'
+import { updateCart, updateSelectedCart } from '../../../stores/ducks/carts'
 
 import './Cart.css'
 
@@ -23,17 +23,19 @@ export function ProductList() {
     dispatch(updateSelectedCart(cart))
   }
 
+  const handleUpdateCart = (cart) => {
+    dispatch(updateCart(cart))
+  }
+
   // use State
   const [search, setSearch] = useState('')
 
   const indexes = useMemo(() => {
-    return productList
-      .map((product, index) => {
-        if (currentCart.items.some((el) => el.code === product.code)) {
-          return index
-        }
-      })
-      
+    return productList.map((product, index) => {
+      if (currentCart.items.some((el) => el.code === product.code)) {
+        return index
+      }
+    })
   }, [currentCategory, currentCart, search])
 
   useEffect(() => {
@@ -92,20 +94,25 @@ export function ProductList() {
             className="ms-3 mb-3 rounded-3"
             value={product.code}
             onClick={(e) => {
-
               // add to current cart
-              const exists = currentCart.items.some((el) => el.code === product.code)
-              
+              const exists = currentCart.items.some(
+                (el) => el.code === product.code,
+              )
+
               if (exists) {
                 handleUpdateSelectedCart({
                   id: currentCart.id,
-                  items: currentCart.items.filter((p) => p.code !== product.code),
+                  items: currentCart.items.filter(
+                    (p) => p.code !== product.code,
+                  ),
                 })
+                handleUpdateCart(currentCart)
               } else {
                 handleUpdateSelectedCart({
                   id: currentCart.id,
                   items: [...currentCart.items, product],
                 })
+                handleUpdateCart(currentCart)
               }
             }}
           >
