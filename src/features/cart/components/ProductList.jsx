@@ -100,7 +100,7 @@ export function ProductList() {
               if (exists) {
                 handleUpdateSelectedCart({
                   id: currentCart.id,
-                  items: currentCart.items.filter((product) => product.code === product.code),
+                  items: currentCart.items.filter((p) => p.code !== product.code),
                 })
               } else {
                 handleUpdateSelectedCart({
