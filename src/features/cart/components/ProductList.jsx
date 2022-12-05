@@ -27,16 +27,17 @@ export function ProductList() {
   const [search, setSearch] = useState('')
 
   const indexes = useMemo(() => {
-    return currentCart.items
+    return productList
       .map((product, index) => {
         if (currentCart.items.some((el) => el.code === product.code)) {
           return index
         }
       })
-      .filter((element) => element >= 0)
+      
   }, [currentCategory, currentCart, search])
 
   useEffect(() => {
+    //console.log(currentCart.items)
     //console.log(indexes)
   }, [currentCart, currentCategory])
 
@@ -91,12 +92,10 @@ export function ProductList() {
             className="ms-3 mb-3 rounded-3"
             value={product.code}
             onClick={(e) => {
-              // add to current cart
 
+              // add to current cart
               const exists = currentCart.items.some((el) => el.code === product.code)
               
-              console.log(exists)
-
               if (exists) {
                 handleUpdateSelectedCart({
                   id: currentCart.id,
