@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table, Button, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 import {
   updateCart,
@@ -14,10 +14,20 @@ import {
 import './OrderDetails.css'
 
 function OrderDetail() {
+
+  const currentCart = useSelector((state) => state.carts.currentCart)
+
   return (
     <div className="border-start vh-100 p-4 pt-0">
       <h2 className="mb-3">Order Details</h2>
-      <ProductTable />
+      {currentCart.id !== -1 ? (
+        <ProductTable />
+      ) : (
+          <div className="text-center center-error">
+          <h3>No cart found!</h3>
+        </div>
+      )}
+      
     </div>
   )
 }
@@ -160,9 +170,31 @@ function ProductTable() {
 
         <hr></hr>
 
-        <div className="d-flex mb-3">
+        <div className="d-flex mb-4">
           <div className="ms-5 ps-5 fs-4 fw-bold">Total</div>
           <div className="mx-auto fs-4 fw-bold">${total}</div>
+        </div>
+
+        <div className="d-flex">
+          <div className="ms-5 ps-5 fs-4 fw-bold">
+            <Button
+              className="checkout-button pt-2"
+              variant="outline-dark"
+              name="delete"
+              onClick={(e) => {
+                handleDeleteCart(currentCart)
+                handleUpdateSelectedCart({
+                  id: -1,
+                  items: [],
+                })
+              }}
+            >
+              <p className="fs-3">
+                {' '}
+                <FontAwesomeIcon icon={faCircleCheck} size="lg" /> Checkout
+              </p>
+            </Button>
+          </div>
         </div>
       </div>
     </>
