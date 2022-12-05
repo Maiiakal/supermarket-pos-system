@@ -2,3 +2,10 @@
     overflow-x: auto;
     white-space: nowrap;
 }
+
+
+
+.products-container {
+    height: 400px;
+    background-color: blue;
+}
