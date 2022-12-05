@@ -40,6 +40,8 @@ The application contains the following dependencies:
   - Formik `2.2.9`
   - Immer `9.0.16`
   - Prettier `2.7.1`
+  - Redux: `4.2.0`
+  - React-redux: `8.0.5`
 
 This project was made using React `18.2.0`.
 
