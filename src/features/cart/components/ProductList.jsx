@@ -1,5 +1,10 @@
 import Card from '../../../components/Card/Card'
-import { Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import {
+  Row,
+  Col,
+  ToggleButton,
+  ButtonGroup,
+} from 'react-bootstrap'
 import Search from '../../table/Search'
 import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,9 +43,7 @@ export function ProductList() {
     })
   }, [currentCategory, currentCart, search])
 
-  useEffect(() => {
-
-  }, [currentCart, currentCategory])
+  useEffect(() => {}, [currentCart, currentCategory])
 
   // returns the currently viewed list with and without search parameters
   const filtered = useMemo(() => {
@@ -62,7 +65,7 @@ export function ProductList() {
   }, [currentCategory, currentCart, productList, search])
 
   return (
-    <div className="mb-5">
+    <div className="mb-5 main-product-list-container ">
       <Row className="mb-3 ms-2">
         <Col>
           <h2 className="mb-3">
@@ -81,36 +84,40 @@ export function ProductList() {
       </Row>
 
       {filtered.map((product) => (
-        <ToggleButton
-          id={`product-${product.code}`}
-          type="checkbox"
-          variant="outline-secondary"
-          className="ms-3 mb-3 rounded-3"
-          value={product.code}
-          checked={currentCart.items.some((el) => el.code === product.code)}
-          onClick={(e) => {
-            // add to current cart
-            const exists = currentCart.items.some(
-              (el) => el.code === product.code,
-            )
+        <ButtonGroup>
+          <ToggleButton
+            id={`product-${product.code}`}
+            type="checkbox"
+            variant="outline-secondary"
+            className="ms-3 mb-3 rounded-3"
+            value={product.code}
+            checked={currentCart.items.some((el) => el.code === product.code)}
+            onClick={(e) => {
+              // add to current cart
+              const exists = currentCart.items.some(
+                (el) => el.code === product.code,
+              )
 
-            if (exists) {
-              handleUpdateSelectedCart({
-                id: currentCart.id,
-                items: currentCart.items.filter((p) => p.code !== product.code),
-              })
-              handleUpdateCart(currentCart)
-            } else {
-              handleUpdateSelectedCart({
-                id: currentCart.id,
-                items: [...currentCart.items, product],
-              })
-              handleUpdateCart(currentCart)
-            }
-          }}
-        >
-          <Card key={product.code} props={product} />
-        </ToggleButton>
+              if (exists) {
+                handleUpdateSelectedCart({
+                  id: currentCart.id,
+                  items: currentCart.items.filter(
+                    (p) => p.code !== product.code,
+                  ),
+                })
+                handleUpdateCart(currentCart)
+              } else {
+                handleUpdateSelectedCart({
+                  id: currentCart.id,
+                  items: [...currentCart.items, product],
+                })
+                handleUpdateCart(currentCart)
+              }
+            }}
+          >
+            <Card key={product.code} props={product} />
+          </ToggleButton>
+        </ButtonGroup>
       ))}
     </div>
   )
