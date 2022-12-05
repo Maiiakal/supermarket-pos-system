@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { useSelector, useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import ToggleButton from 'react-bootstrap/ToggleButton'
@@ -9,11 +7,11 @@ import { faCartPlus, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import './Cart.css'
 import {
   createCart,
-  deleteCart,
   updateSelectedCart,
 } from '../../../stores/ducks/carts'
 
 export function CartList() {
+
   //REDUX
   const dispatch = useDispatch()
   const cartList = useSelector((state) => state.carts.list)
@@ -21,10 +19,6 @@ export function CartList() {
 
   const handleCreateCart = (cart) => {
     dispatch(createCart(cart))
-  }
-
-  const handleDeleteCart = (cart) => {
-    dispatch(deleteCart(cart))
   }
 
   const handleUpdateSelectedCart = (cart) => {
