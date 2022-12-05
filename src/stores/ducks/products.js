@@ -20,7 +20,7 @@ export const deleteProduct = (product) => ({
 });
 
 const initialState = {
-  list: ProductsGenerator(15),
+  list: ProductsGenerator(29),
 };
 
 // reducers
