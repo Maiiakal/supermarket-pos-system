@@ -8,7 +8,7 @@ The application is an experminetal React web project for an internship at Foothi
 
 [Demo Link](https://sumart.netlify.app/)
 
-## Data model
+## Data Model
 
 The application contains the following models:
 
@@ -31,7 +31,7 @@ The application contains the following models:
 
 - Shopping Cart: represents the list of products that are automatically calculated during checkout.
 
-## Dependencies used
+## Dependencies
 
 The application contains the following dependencies:
 
