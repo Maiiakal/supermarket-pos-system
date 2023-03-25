@@ -6,7 +6,7 @@ The application is an experminetal React web project for an internship at Foothi
 
 `NOTE: Site is under construction. Please review the issues added to this repository for upcoming updates and features.`
 
-[Demo](https://sumart.netlify.app/)
+[Demo Link](https://sumart.netlify.app/)
 
 ## Data model
 
@@ -47,7 +47,7 @@ This project was made using React `18.2.0`.
 
 ## Code Architecture
 
-Several design patterns have been researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react). I will copy the key design concepts I tried implementing below.
+Several design patterns have been researched and by far this project was mostly inspired by alan2207's [bulletproof-react](https://github.com/alan2207/bulletproof-react). I will copy the key design concepts I tried implementing below:
 
 
 - [⚙️ Project Configuration](docs/project-configuration.md)
